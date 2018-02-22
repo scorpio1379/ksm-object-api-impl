@@ -6,6 +6,7 @@ import ru.ip.ksm.ksmobjectapi.builders.KSMCIBuilder;
 import ru.ip.ksm.ksmobjectapi.builders.KSMHIBuilder;
 import ru.ip.ksm.ksmobjectapi.builders.KSMKPIBuilder;
 import ru.ip.ksm.ksmobjectapi.builders.KSMServiceBuilder;
+import ru.ip.ksm.ksmobjectapi.ksmservices.KSMTopologyService;
 import ru.ip.ksm.ksmobjectapi.objects.KSMCI;
 import ru.ip.ksm.ksmobjectapi.objects.KSMHI;
 import ru.ip.ksm.ksmobjectapi.objects.KSMKPI;

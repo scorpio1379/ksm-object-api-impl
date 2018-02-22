@@ -18,9 +18,9 @@ public abstract class KSMBaseObjectImpl {
         return ksmObjectId;
     }
 
-    public String getKsmObjectType() {
-        return ksmObjectType;
-    }
+
+
+
 
     public String getName() {
         return name;
@@ -32,5 +32,21 @@ public abstract class KSMBaseObjectImpl {
 
     public String getDebuginfo() {
         return debuginfo;
+    }
+
+    public void setKsmObjectId(String ksmObjectId) {
+        this.ksmObjectId = ksmObjectId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDebuginfo(String debuginfo) {
+        this.debuginfo = debuginfo;
     }
 }

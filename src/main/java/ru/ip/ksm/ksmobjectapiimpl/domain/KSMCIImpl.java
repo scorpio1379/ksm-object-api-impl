@@ -11,5 +11,17 @@ public class KSMCIImpl extends KSMBaseObjectImpl {
     public KSMCIImpl() {
         super();
         this.ksmObjectType = "KSMCI";
+        this.ksmCIType = "REGULAR";
     }
+
+    public String getKsmCIType() {
+        return ksmCIType;
+    }
+    public String getKsmObjectType() {
+        return ksmObjectType;
+    }
+
+
+
+
 }

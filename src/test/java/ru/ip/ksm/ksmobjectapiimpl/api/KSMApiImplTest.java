@@ -7,8 +7,11 @@ import org.neo4j.test.rule.TestDirectory;
 import ru.ip.ksm.ksmobjectapi.KSMApi;
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceFactory;
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
+import ru.ip.ksm.ksmobjectapiimpl.domain.KSMCIImpl;
+import ru.ip.ksm.ksmobjectapiimpl.services.KSMCIServiceOGMImpl;
 
 import java.net.URI;
+import java.util.UUID;
 
 public class KSMApiImplTest {
     @Rule
@@ -32,6 +35,12 @@ public class KSMApiImplTest {
     @org.junit.Test
     public void getKSMTopologyService() {
         this.ksmApi.getKSMTopologyService().createNewCI().setName("name").setDescription("desc").build();
+        KSMCIImpl ci = new KSMCIImpl();
+        ci.setName("name1");
+        ci.setKsmObjectId(UUID.randomUUID().toString());
+
+        new KSMCIServiceOGMImpl().createOrUpdate(ci);
+        System.out.println();
     }
 
     @org.junit.Test

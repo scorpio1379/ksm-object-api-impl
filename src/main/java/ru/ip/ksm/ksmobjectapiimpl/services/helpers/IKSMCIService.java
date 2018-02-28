@@ -1,9 +1,8 @@
 package ru.ip.ksm.ksmobjectapiimpl.services.helpers;
 
-import ru.ip.ksm.ksmobjectapiimpl.domain.KSMCIImpl;
-import ru.ip.ksm.ksmobjectapiimpl.services.abstracts.AbstractKSMObjectService;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
 
-public interface IKSMCIService<T extends KSMCIImpl>
-        extends AbstractKSMObjectService<T> {
+public interface IKSMCIService<T extends IKSMCI>
+        extends IKSMObjectService {
     void doSmthWithCI(T ksmci);
 }

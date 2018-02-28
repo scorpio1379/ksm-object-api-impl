@@ -1,6 +1,10 @@
 package ru.ip.ksm.ksmobjectapiimpl.services;
 
-public interface KSMCIService <KSMOBJ , KSMCI>{
+import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
+import ru.ip.ksm.ksmobjectapiimpl.services.helpers.IKSMCIService;
+
+public interface KSMCIService<T extends KSMCI> extends IKSMCIService<T>{
+    T doSmthgWithCI(T ci);
 
 
 }

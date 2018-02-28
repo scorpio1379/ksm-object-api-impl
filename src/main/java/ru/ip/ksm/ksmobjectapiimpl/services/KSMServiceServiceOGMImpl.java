@@ -1,10 +1,9 @@
 package ru.ip.ksm.ksmobjectapiimpl.services;
 
 import ru.ip.ksm.ksmobjectapiimpl.domain.KSMServiceImpl;
-import ru.ip.ksm.ksmobjectapiimpl.services.abstracts.BaseKSMObjectServiceOGMImpl;
 
 public class KSMServiceServiceOGMImpl
-        extends BaseKSMObjectServiceOGMImpl<KSMServiceImpl>
+        extends KSMCIServiceOGMImpl<KSMServiceImpl>
 /* через этот класс имплементируется не верный интерфейс  KSMCIService а нужен ksmciservice<ksmservice>*/
 
         implements KSMServiceService

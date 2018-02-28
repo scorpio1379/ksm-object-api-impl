@@ -1,18 +1,17 @@
 package ru.ip.ksm.ksmobjectapiimpl.api;
 
 
-import ru.ip.ksm.ksmobjectapi.KSMApi;
-import ru.ip.ksm.ksmobjectapi.builders.KSMCIBuilder;
-import ru.ip.ksm.ksmobjectapi.builders.KSMHIBuilder;
-import ru.ip.ksm.ksmobjectapi.builders.KSMKPIBuilder;
-import ru.ip.ksm.ksmobjectapi.builders.KSMServiceBuilder;
-import ru.ip.ksm.ksmobjectapi.ksmservices.KSMTopologyService;
-import ru.ip.ksm.ksmobjectapi.objects.KSMCI;
-import ru.ip.ksm.ksmobjectapi.objects.KSMHI;
-import ru.ip.ksm.ksmobjectapi.objects.KSMKPI;
-import ru.ip.ksm.ksmobjectapi.objects.KSMService;
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMCIBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMHIBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMKPIBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMServiceBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
+import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMHI;
+import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMKPI;
+import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMService;
 import ru.ip.ksm.ksmobjectapiimpl.ksmservices.KSMToplogyServiceImpl;
+import ru.ip.ksm.ksmobjectapiimpl.ksmservices.KSMTopologyService;
 
 import java.util.Set;
 

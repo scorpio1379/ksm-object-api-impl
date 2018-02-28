@@ -1,8 +1,11 @@
 package ru.ip.ksm.ksmobjectapiimpl.services.abstracts;
 
-import ru.ip.ksm.ksmobjectapiimpl.domain.abstracts.KSMBaseObjectImpl;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMObject;
 
-public interface AbstractKSMObjectService<KSMOBJ extends KSMBaseObjectImpl> {
+public interface AbstractKSMObjectService<KSMOBJ extends IKSMObject> {
+
+    KSMOBJ doSomethingWithKSMObject(KSMOBJ ksmObject);
+
     Iterable<KSMOBJ> findAll();
 
     KSMOBJ find(Long id);
@@ -12,6 +15,8 @@ public interface AbstractKSMObjectService<KSMOBJ extends KSMBaseObjectImpl> {
     KSMOBJ findByKsmObjId(String ksmObjId);
 
     void delete(Long id);
+
+    void delete(String id);
 
     void deleteByKsmObjId(String ksmObjId);
 

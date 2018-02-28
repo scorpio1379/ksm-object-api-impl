@@ -1,6 +1,12 @@
 package ru.ip.ksm.ksmobjectapiimpl.domain;
 
-public class KSMServiceImpl extends KSMCIImpl{
+import org.neo4j.ogm.annotation.NodeEntity;
+import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMService;
+
+@NodeEntity
+public class KSMServiceImpl
+        extends KSMCIImpl
+        implements KSMService{
 
     protected String KSMServiceType;
 

@@ -1,14 +1,15 @@
 package ru.ip.ksm.ksmobjectapiimpl.ksmservices;
 
-import ru.ip.ksm.ksmobjectapi.builders.KSMCIBuilder;
-import ru.ip.ksm.ksmobjectapi.ksmservices.KSMTopologyService;
-import ru.ip.ksm.ksmobjectapi.objects.KSMCI;
-import ru.ip.ksm.ksmobjectapi.objects.KSMHI;
-import ru.ip.ksm.ksmobjectapi.objects.KSMKPI;
-import ru.ip.ksm.ksmobjectapi.objects.KSMService;
-import ru.ip.ksm.ksmobjectapi.objects.abstracts.KSMIndicator;
-import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
 
+import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
+import ru.ip.ksm.ksmobjectapiimpl.builders.factories.KSMObjectBuilderfactory;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMCIBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMServiceModelBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.domain.KSMCIImpl;
+import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.*;
+import ru.ip.ksm.ksmobjectapiimpl.services.factories.KSMObjectServiceFactory;
+
+import java.util.HashSet;
 import java.util.Set;
 
 public class KSMToplogyServiceImpl  implements KSMTopologyService {
@@ -21,31 +22,44 @@ public class KSMToplogyServiceImpl  implements KSMTopologyService {
 
     @Override
     public Set<KSMCI> getAllKSMCIs() {
-        return null;
+        Set<KSMCI> returnSet = new HashSet<>();
+        Iterable<KSMCI> iterables = KSMObjectServiceFactory.getKSMCIService(KSMCIImpl.class, KSM_OBJECT_API_SERVICE_PROVIDER).findAll();
+        iterables.forEach(ksmci -> returnSet.add(ksmci));
+        return returnSet;
     }
 
     @Override
-    public Set<KSMIndicator> getAllIndicators() {
-        return null;
+    public Set<AbstarctKSMIndicator> getAllIndicators() {
+        throw new IllegalArgumentException("Not Implemented YET");
     }
 
     @Override
     public Set<KSMHI> getAllKSMHIs() {
-        return null;
+        throw new IllegalArgumentException("Not Implemented YET");
     }
 
     @Override
     public Set<KSMKPI> getAllKPIs() {
-        return null;
+        throw new IllegalArgumentException("Not Implemented YET");
     }
 
     @Override
     public Set<KSMService> getAllKSMServices() {
-        return null;
+        throw new IllegalArgumentException("Not Implemented YET");
     }
 
     @Override
     public KSMCIBuilder createNewCI() {
-        return null;
+        return KSMObjectBuilderfactory.getCIBuilder(KSM_OBJECT_API_SERVICE_PROVIDER);
+    }
+
+    @Override
+    public KSMServiceModelBuilder createNewKSMServiceModel() {
+        return KSMObjectBuilderfactory.getKSMServiceModelBuilder(KSM_OBJECT_API_SERVICE_PROVIDER);
+    }
+
+    @Override
+    public KSMService getKSMService(String ksmObjectId) {
+        throw new IllegalArgumentException("Not Implemented YET");
     }
 }

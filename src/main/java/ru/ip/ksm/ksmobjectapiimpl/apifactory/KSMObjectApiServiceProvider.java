@@ -3,7 +3,7 @@ package ru.ip.ksm.ksmobjectapiimpl.apifactory;
 import org.neo4j.ogm.config.Configuration;
 import org.neo4j.ogm.session.Session;
 import org.neo4j.ogm.session.SessionFactory;
-import ru.ip.ksm.ksmobjectapi.KSMApi;
+import ru.ip.ksm.ksmobjectapiimpl.api.KSMApi;
 import ru.ip.ksm.ksmobjectapiimpl.api.KSMApiImpl;
 
 import java.net.URI;
@@ -19,7 +19,9 @@ public class KSMObjectApiServiceProvider {
         if (ksmCoreServerUri.getScheme().equalsIgnoreCase("bolt")){
             this.ksmCoreServerUri = ksmCoreServerUri;
             Configuration cfg = new Configuration.Builder().uri(ksmCoreServerUri.toString()).autoIndex("assert").build();
+            //Configuration cfg1 = new Configuration.Builder().uri(ksmCoreServerUri.toString()).build();
             Boolean isVerified = cfg.getVerifyConnection();
+            //SessionFactory sf = new SessionFactory(cfg1);
             this.sessionFactory = new SessionFactory(cfg, DOMAIN_PACKAGE);
         }else{
             throw new IllegalArgumentException("protocol in uri MUST be bolt://");
@@ -45,7 +47,7 @@ public class KSMObjectApiServiceProvider {
 
 
 
-    public  KSMApi connect(){
+    public KSMApi connect(){
         return new KSMApiImpl(this);
 
     }

@@ -4,6 +4,7 @@ import ru.ip.ksm.ksmobjectapiimpl.builders.infs.abstracts.AbstractKSMIndicatorBu
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMKPI;
 
 
-public interface KSMKPIBuilder extends AbstractKSMIndicatorBuilder<KSMKPIBuilder> {
+public interface KSMKPIBuilder<T extends AbstractKSMIndicatorBuilder<T>>
+        extends AbstractKSMIndicatorBuilder<T> {
     KSMKPI build();
 }

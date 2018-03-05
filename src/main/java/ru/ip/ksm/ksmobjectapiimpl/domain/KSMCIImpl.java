@@ -3,6 +3,10 @@ package ru.ip.ksm.ksmobjectapiimpl.domain;
 import org.neo4j.ogm.annotation.NodeEntity;
 import ru.ip.ksm.ksmobjectapiimpl.domain.abstracts.KSMBaseObjectImpl;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
+import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMHI;
+import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMKPI;
+
+import java.util.Set;
 
 @NodeEntity
 public class KSMCIImpl
@@ -36,6 +40,26 @@ public class KSMCIImpl
     }
 
 
+    @Override
+    public KSMKPI addNewKSMKPI() {
+        throw new IllegalArgumentException("Not implemented yet");
+        //return null;
+    }
 
+    @Override
+    public KSMHI addNewKSMHI() {
+        return null;
+    }
 
+    @Override
+    public Set<KSMKPI> getAllAttachedKSMKPIs() {
+        throw new IllegalArgumentException("Not implemented yet");
+        //return null;
+    }
+
+    @Override
+    public Set<KSMHI> getAllAttachedKSMHIs() {
+        throw new IllegalArgumentException("Not implemented yet");
+        //return null;
+    }
 }

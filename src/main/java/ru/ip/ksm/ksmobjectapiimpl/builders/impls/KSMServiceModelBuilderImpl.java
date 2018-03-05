@@ -9,9 +9,10 @@ import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMService;
 import java.util.HashSet;
 import java.util.Set;
 
-public class KSMServiceModelBuilderImpl<T extends  KSMServiceModelBuilder , U extends KSMService>
-        extends KSMCIBuilderImpl
-        implements KSMServiceModelBuilder {
+public class KSMServiceModelBuilderImpl<T extends  KSMServiceModelBuilder<T> , U extends KSMService>
+        //extends KSMCIBuilderImpl<KSMServiceModelBuilder<T>>
+        extends KSMCIBuilderImpl<T>
+        implements KSMServiceModelBuilder<T> {
 
 
     private final Class<? extends IKSMService> CI_SERVICE_IMPL ;
@@ -30,11 +31,15 @@ public class KSMServiceModelBuilderImpl<T extends  KSMServiceModelBuilder , U ex
 
 
     @Override
-    public KSMServiceModelBuilder addKSMCI(KSMCI ksmci) {
+    public T addKSMCI(KSMCI ksmci) {
         this.relatedKSMCIs.add(ksmci);
-        return this;
+        return (T) this;
     }
 
+    @Override
+    public T addKSMCI(String ksmCiObjectId) {
+        throw new IllegalArgumentException("not implemented");
+    }
 
 
 }

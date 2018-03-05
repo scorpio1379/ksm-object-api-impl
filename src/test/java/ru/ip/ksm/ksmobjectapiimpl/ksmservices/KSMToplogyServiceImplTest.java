@@ -8,6 +8,7 @@ import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
 import ru.ip.ksm.ksmobjectapiimpl.builders.impls.KSMCIBuilderImpl;
 import ru.ip.ksm.ksmobjectapiimpl.builders.impls.abstracts.BaseKSMObjectBuilderImpl;
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMCIBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMServiceModelBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.abstracts.AbstractKSMObjectBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.domain.KSMCIImpl;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
@@ -61,13 +62,8 @@ public class KSMToplogyServiceImplTest {
         ksmTopoService.createNewKSMServiceModel()
                 .setName("serviceName")
                 .setDescription("desc")
-                .addKSMCI(ksmTopoService.createNewCI()
-                        .setName("name")
-                        .setDescription("desc")
-                        .setKsmObjectId(UUID.randomUUID().toString())
-                        .build())
-                .addKSMCI("ksmId")
-                .addRelationship();
+                .addKSMCI(ksmTopoService.createNewCI().setName("ciName").setDescription("descr").build())
+                .build();
 
     }
 

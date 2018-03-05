@@ -6,7 +6,7 @@ public interface KSMServiceModelBuilder<T extends KSMServiceModelBuilder<T>>
         //extends KSMCIBuilder<KSMServiceModelBuilder<T>>
         extends KSMCIBuilder<T>{
 
-    T addKSMCI(KSMCI ksmci);
+   // T addKSMCI(KSMCI ksmci);
     T addKSMCI(String ksmCiObjectId);
     T setName(String name);
     T setDescription(String name);

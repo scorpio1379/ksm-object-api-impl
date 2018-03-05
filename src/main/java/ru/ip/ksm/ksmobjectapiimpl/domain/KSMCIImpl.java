@@ -1,6 +1,8 @@
 package ru.ip.ksm.ksmobjectapiimpl.domain;
 
 import org.neo4j.ogm.annotation.NodeEntity;
+import ru.ip.ksm.ksmobjectapiimpl.builders.factories.KSMObjectBuilderfactory;
+import ru.ip.ksm.ksmobjectapiimpl.builders.impls.KSMHIBuilderImpl;
 import ru.ip.ksm.ksmobjectapiimpl.domain.abstracts.KSMBaseObjectImpl;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMHI;
@@ -48,7 +50,8 @@ public class KSMCIImpl
 
     @Override
     public KSMHI addNewKSMHI() {
-        return null;
+        throw new IllegalArgumentException("Not implemented yet");
+
     }
 
     @Override

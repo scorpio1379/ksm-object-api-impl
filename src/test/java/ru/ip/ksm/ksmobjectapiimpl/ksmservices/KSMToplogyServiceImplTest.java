@@ -62,7 +62,7 @@ public class KSMToplogyServiceImplTest {
         ksmTopoService.createNewKSMServiceModel()
                 .setName("serviceName")
                 .setDescription("desc")
-                .addKSMCI(ksmTopoService.createNewCI().setName("ciName").setDescription("descr").build())
+               // .addKSMCI(ksmTopoService.createNewCI().setName("ciName").setDescription("descr").build())
                 .build();
 
     }
@@ -79,11 +79,12 @@ public class KSMToplogyServiceImplTest {
                     KSMCIBuilder ksmciBuilder1 = (KSMCIBuilder) ksmciBuilder;
                     KSMCIBuilder a = ksmTopoService.createNewCI();
                     KSMCIBuilder o = a.setName("fdsfs");
-                    ksmTopoService.createNewCI()
+                    KSMCI d = ksmTopoService.createNewCI()
                             .setName("name")
                             .setDescription("desc")
                             .setKsmObjectId(UUID.randomUUID().toString())
                             .build();
+
                 }
             });
             t.run();

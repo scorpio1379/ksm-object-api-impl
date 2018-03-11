@@ -3,7 +3,7 @@ package ru.ip.ksm.ksmobjectapiimpl.builders.impls.abstracts;
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.abstracts.AbstractKSMIndicatorBuilder;
 
-public class BaseKSMIndicatorBuilderImpl<T extends AbstractKSMIndicatorBuilder<T>>
+public abstract class BaseKSMIndicatorBuilderImpl<T extends AbstractKSMIndicatorBuilder<T>>
         extends BaseKSMObjectBuilderImpl<T>
         implements AbstractKSMIndicatorBuilder<T> {
 

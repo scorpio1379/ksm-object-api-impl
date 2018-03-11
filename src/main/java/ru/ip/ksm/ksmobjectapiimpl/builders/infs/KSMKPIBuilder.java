@@ -4,7 +4,15 @@ import ru.ip.ksm.ksmobjectapiimpl.builders.infs.abstracts.AbstractKSMIndicatorBu
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMKPI;
 
 
-public interface KSMKPIBuilder<T extends AbstractKSMIndicatorBuilder<T>>
+public interface KSMKPIBuilder<T extends KSMKPIBuilder<T>>
         extends AbstractKSMIndicatorBuilder<T> {
-    KSMKPI build();
+    T setRuleId(String ksmKpiCalulationRuleId);
+    T setStatus(String status);
+    T setValue(String value);
+
+    T setName(String name);
+    T setDescription(String name);
+    T setKsmObjectId(String ksmObjectId);
+
+    KSMKPI build() throws IllegalAccessException, InstantiationException;
 }

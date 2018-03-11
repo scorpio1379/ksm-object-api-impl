@@ -4,4 +4,8 @@ public interface AbstractKSMIndicatorBuilder<T extends AbstractKSMIndicatorBuild
         extends AbstractKSMObjectBuilder<T> {
     T setStatus(String status);
     T setValue(String value);
+
+    T setName(String name);
+    T setDescription(String name);
+    T setKsmObjectId(String ksmObjectId);
 }

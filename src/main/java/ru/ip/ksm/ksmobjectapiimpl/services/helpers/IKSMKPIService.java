@@ -1,4 +1,6 @@
 package ru.ip.ksm.ksmobjectapiimpl.services.helpers;
 
-public interface IKSMKPIService extends IKSMIndicatorService {
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMKPI;
+
+public interface IKSMKPIService<T extends IKSMKPI> extends IKSMIndicatorService<T> {
 }

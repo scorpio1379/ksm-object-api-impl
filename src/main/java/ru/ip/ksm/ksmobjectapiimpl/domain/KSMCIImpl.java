@@ -1,6 +1,8 @@
 package ru.ip.ksm.ksmobjectapiimpl.domain;
 
+import org.neo4j.cypher.internal.frontend.v2_3.SemanticDirection;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 import ru.ip.ksm.ksmobjectapiimpl.builders.factories.KSMObjectBuilderfactory;
 import ru.ip.ksm.ksmobjectapiimpl.builders.impls.KSMHIBuilderImpl;
 import ru.ip.ksm.ksmobjectapiimpl.domain.abstracts.KSMBaseObjectImpl;
@@ -16,6 +18,21 @@ public class KSMCIImpl
         implements KSMCI {
 
     protected String ksmCIType = "REGULAR";
+
+    /** связь с KSMKPI*/
+    @Relationship(type = "AttachedKSMKPI")
+    private Set<AttachedKSMKPIKSMRelationShip> attachedKSMKPIKSMRelationShips;
+    /** связи с KSMHI*/
+    @Relationship(type = "AttachedKSMHI")
+    private Set<AttachedKSMHIKSMRelationShip> attachedKSMHIKSMRelationShips;
+
+    /** связи с  родительскими KSMCI*/
+    @Relationship(type = "LinkedKSMCI" , direction = "OUTGOING")
+    private Set<KSMCI> parentKSMCIs;
+
+    /** связи с  дочерними KSMCI*/
+    @Relationship(type = "LinkedKSMCI" , direction = "INCOMING")
+    private Set<KSMCI> childKSMCIs;
 
     public KSMCIImpl() {
         super();

@@ -2,6 +2,7 @@ package ru.ip.ksm.ksmobjectapiimpl.ksmservices;
 
 
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMCIBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMKPIBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMServiceModelBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.*;
 
@@ -19,6 +20,8 @@ public interface KSMTopologyService {
     KSMServiceModelBuilder createNewKSMServiceModel();
 
     KSMService getKSMService(String ksmObjectId);
+
+    KSMKPIBuilder addNewKSMKPIToKSMCI(KSMCI ksmci) ;
 
 
 }

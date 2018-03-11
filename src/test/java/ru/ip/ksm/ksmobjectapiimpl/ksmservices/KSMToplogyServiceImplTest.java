@@ -62,7 +62,7 @@ public class KSMToplogyServiceImplTest {
         ksmTopoService.createNewKSMServiceModel()
                 .setName("serviceName")
                 .setDescription("desc")
-               // .addKSMCI(ksmTopoService.createNewCI().setName("ciName").setDescription("descr").build())
+                .setKsmObjectId("c2a407f2-3e4a-48c8-8687-65da01995f88")
                 .build();
 
     }
@@ -80,15 +80,31 @@ public class KSMToplogyServiceImplTest {
                     KSMCIBuilder a = ksmTopoService.createNewCI();
                     KSMCIBuilder o = a.setName("fdsfs");
                     KSMCI d = ksmTopoService.createNewCI()
-                            .setName("name")
+                            .setName("CI name CI")
                             .setDescription("desc")
                             .setKsmObjectId(UUID.randomUUID().toString())
                             .build();
+
 
                 }
             });
             t.run();
         }
 
+    }
+    @Test
+    public void addNewKSMKPIToKSMCI(){
+        ksmTopoService.addNewKSMKPIToKSMCI(
+                ksmTopoService.createNewKSMServiceModel()
+                        .setName("serviceName")
+                        .setDescription("desc")
+                        .setKsmObjectId("c2a407f2-3e4a-48c8-8687-65da01995f88")
+                        .build())
+                .setName("kpiname")
+                .setDescription("kpidescr")
+                .setRuleId("someruleid")
+                .setStatus("sts")
+                .setValue("42")
+                .build();
     }
 }

@@ -7,7 +7,7 @@ import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMHIBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.abstracts.AbstractKSMIndicatorBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMHI;
 
-public class KSMHIBuilderImpl<T extends AbstractKSMIndicatorBuilder<T>>
+public class KSMHIBuilderImpl<T extends KSMHIBuilder<T>>
         extends BaseKSMIndicatorBuilderImpl<T>
         implements KSMHIBuilder<T> {
     public KSMHIBuilderImpl(KSMObjectApiServiceProvider ksmObjectApiServiceProvider) {

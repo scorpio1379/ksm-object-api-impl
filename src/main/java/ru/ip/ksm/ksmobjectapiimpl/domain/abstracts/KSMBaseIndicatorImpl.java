@@ -37,4 +37,9 @@ public abstract class KSMBaseIndicatorImpl
     public void setValue(String value) {
         this.value = value;
     }
+
+    @Override
+    public void setKsmIndicatorType(String ksmIndicatorType) {
+        this.ksmIndicatorType = ksmIndicatorType;
+    }
 }

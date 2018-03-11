@@ -4,6 +4,7 @@ package ru.ip.ksm.ksmobjectapiimpl.ksmservices;
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
 import ru.ip.ksm.ksmobjectapiimpl.builders.factories.KSMObjectBuilderfactory;
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMCIBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMKPIBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMServiceModelBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.domain.KSMCIImpl;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.*;
@@ -61,5 +62,10 @@ public class KSMToplogyServiceImpl  implements KSMTopologyService {
     @Override
     public KSMService getKSMService(String ksmObjectId) {
         throw new IllegalArgumentException("Not Implemented YET");
+    }
+
+    @Override
+    public KSMKPIBuilder addNewKSMKPIToKSMCI(KSMCI ksmci) {
+        return KSMObjectBuilderfactory.getKSMKPIBuilder(KSM_OBJECT_API_SERVICE_PROVIDER ,ksmci);
     }
 }

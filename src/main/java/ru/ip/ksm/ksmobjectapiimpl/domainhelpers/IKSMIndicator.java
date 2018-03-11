@@ -8,4 +8,6 @@ public interface IKSMIndicator extends IKSMObject {
 
     void setStatus( String status);
     void setValue(String value);
+
+    void setKsmIndicatorType(String ksmkpi);
 }

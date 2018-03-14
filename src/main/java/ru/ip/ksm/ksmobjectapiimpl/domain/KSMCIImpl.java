@@ -6,6 +6,9 @@ import org.neo4j.ogm.annotation.Relationship;
 import ru.ip.ksm.ksmobjectapiimpl.builders.factories.KSMObjectBuilderfactory;
 import ru.ip.ksm.ksmobjectapiimpl.builders.impls.KSMHIBuilderImpl;
 import ru.ip.ksm.ksmobjectapiimpl.domain.abstracts.KSMBaseObjectImpl;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMHI;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMKPI;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMHI;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMKPI;
@@ -15,24 +18,24 @@ import java.util.Set;
 @NodeEntity
 public class KSMCIImpl
         extends KSMBaseObjectImpl
-        implements KSMCI {
+        implements IKSMCI {
 
     protected String ksmCIType = "REGULAR";
 
     /** связь с KSMKPI*/
     @Relationship(type = "AttachedKSMKPI")
-    private Set<AttachedKSMKPIKSMRelationShip> attachedKSMKPIKSMRelationShips;
+    private Set<KSMKPIImpl> attachedKSMKPIs;
     /** связи с KSMHI*/
     @Relationship(type = "AttachedKSMHI")
-    private Set<AttachedKSMHIKSMRelationShip> attachedKSMHIKSMRelationShips;
+    private Set<KSMHIImpl> attachedKSMHIs;
 
     /** связи с  родительскими KSMCI*/
-    @Relationship(type = "LinkedKSMCI" , direction = "OUTGOING")
-    private Set<KSMCI> parentKSMCIs;
+    @Relationship(type = "Linked_KSMCI" , direction = "OUTGOING")
+    private Set<KSMCIImpl> parentKSMCIs;
 
     /** связи с  дочерними KSMCI*/
-    @Relationship(type = "LinkedKSMCI" , direction = "INCOMING")
-    private Set<KSMCI> childKSMCIs;
+    @Relationship(type = "Linked_KSMCI" , direction = "INCOMING")
+    private Set<KSMCIImpl> childKSMCIs;
 
     public KSMCIImpl() {
         super();
@@ -59,26 +62,13 @@ public class KSMCIImpl
     }
 
 
-    @Override
-    public KSMKPI addNewKSMKPI() {
+    public Set<KSMKPIImpl> getAllAttachedKSMKPIs() {
         throw new IllegalArgumentException("Not implemented yet");
         //return null;
     }
 
-    @Override
-    public KSMHI addNewKSMHI() {
-        throw new IllegalArgumentException("Not implemented yet");
 
-    }
-
-    @Override
-    public Set<KSMKPI> getAllAttachedKSMKPIs() {
-        throw new IllegalArgumentException("Not implemented yet");
-        //return null;
-    }
-
-    @Override
-    public Set<KSMHI> getAllAttachedKSMHIs() {
+    public Set<KSMHIImpl> getAllAttachedKSMHIs() {
         throw new IllegalArgumentException("Not implemented yet");
         //return null;
     }

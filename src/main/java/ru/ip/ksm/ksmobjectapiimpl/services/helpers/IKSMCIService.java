@@ -4,5 +4,5 @@ import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
 
 public interface IKSMCIService<T extends IKSMCI>
         extends IKSMObjectService {
-    void doSmthWithCI(T ksmci);
+    T doSmthWithCI(T ksmci);
 }

@@ -9,7 +9,7 @@ import ru.ip.ksm.ksmobjectapiimpl.api.KSMApiImpl;
 import java.net.URI;
 
 public class KSMObjectApiServiceProvider {
-    private static final String DOMAIN_PACKAGE = "ru.ip.ksm.ksmobjectapiimpl.domain";
+    private static final String[] DOMAIN_PACKAGES = {"ru.ip.ksm.ksmobjectapiimpl.domain" , "ru.ip.ksm.ksmobjectapiimpl.domainhelpers"};
     private final URI ksmCoreServerUri ;
     private final  SessionFactory sessionFactory;
 
@@ -22,7 +22,7 @@ public class KSMObjectApiServiceProvider {
             //Configuration cfg1 = new Configuration.Builder().uri(ksmCoreServerUri.toString()).build();
             Boolean isVerified = cfg.getVerifyConnection();
             //SessionFactory sf = new SessionFactory(cfg1);
-            this.sessionFactory = new SessionFactory(cfg, DOMAIN_PACKAGE);
+            this.sessionFactory = new SessionFactory(cfg, DOMAIN_PACKAGES);
         }else{
             throw new IllegalArgumentException("protocol in uri MUST be bolt://");
         }
@@ -33,7 +33,7 @@ public class KSMObjectApiServiceProvider {
             this.ksmCoreServerUri = URI.create(ksmCoreServerUri);
             Configuration cfg = new Configuration.Builder().uri(ksmCoreServerUri.toString()).autoIndex("assert").build();
             Boolean isVerified = cfg.getVerifyConnection();
-            this.sessionFactory = new SessionFactory(cfg, DOMAIN_PACKAGE);
+            this.sessionFactory = new SessionFactory(cfg, DOMAIN_PACKAGES);
         }else{
             throw new IllegalArgumentException("protocol in uri MUST be bolt://");
         }

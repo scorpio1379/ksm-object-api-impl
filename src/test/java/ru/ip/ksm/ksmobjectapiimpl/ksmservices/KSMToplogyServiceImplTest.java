@@ -12,6 +12,7 @@ import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMServiceModelBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.abstracts.AbstractKSMObjectBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.domain.KSMCIImpl;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
+import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMServiceModel;
 
 import java.net.URI;
 import java.util.Set;
@@ -35,11 +36,18 @@ public class KSMToplogyServiceImplTest {
                 //.setDaemon(true)
                 .build();
         this.executorService = Executors.newFixedThreadPool(20, threadFactory);
+
+
     }
 
     @Test
     public void getAllKSMCIs() {
         Set<KSMCI> cis = ksmTopoService.getAllKSMCIs();
+        for (KSMCI ci: cis
+             ) {
+            System.out.println("KSMCI " + ci.getName() + " have ksmid " + ci.getKsmObjectId());
+
+        }
     }
 
     @Test
@@ -73,19 +81,11 @@ public class KSMToplogyServiceImplTest {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    BaseKSMObjectBuilderImpl baseKSMObjectBuilder = new BaseKSMObjectBuilderImpl(KSMObjectApiServiceFactory.getKSMObjectApiServiceProvider(URI.create("bolt://localhost:7687")));
-                    AbstractKSMObjectBuilder abstractKSMObjectBuilder = (AbstractKSMObjectBuilder) baseKSMObjectBuilder;
-                    KSMCIBuilderImpl ksmciBuilder = new KSMCIBuilderImpl(KSMCIImpl.class , KSMObjectApiServiceFactory.getKSMObjectApiServiceProvider(URI.create("bolt://localhost:7687")));
-                    KSMCIBuilder ksmciBuilder1 = (KSMCIBuilder) ksmciBuilder;
-                    KSMCIBuilder a = ksmTopoService.createNewCI();
-                    KSMCIBuilder o = a.setName("fdsfs");
                     KSMCI d = ksmTopoService.createNewCI()
                             .setName("CI name CI")
                             .setDescription("desc")
                             .setKsmObjectId(UUID.randomUUID().toString())
                             .build();
-
-
                 }
             });
             t.run();
@@ -93,7 +93,7 @@ public class KSMToplogyServiceImplTest {
 
     }
     @Test
-    public void addNewKSMKPIToKSMCI(){
+    public void addNewKSMKPIToKSMCI() throws InstantiationException, IllegalAccessException {
         ksmTopoService.addNewKSMKPIToKSMCI(
                 ksmTopoService.createNewKSMServiceModel()
                         .setName("serviceName")
@@ -107,4 +107,130 @@ public class KSMToplogyServiceImplTest {
                 .setValue("42")
                 .build();
     }
+
+    @Test
+    public void addNewKSMHIToKSMCI() throws InstantiationException, IllegalAccessException {
+        ksmTopoService.addNewKSMHIToKSMCI(
+                ksmTopoService.createNewKSMServiceModel()
+                        .setName("serviceName")
+                        .setDescription("desc")
+                        .setKsmObjectId("c2a407f2-3e4a-48c8-8687-65da01995f88")
+                        .build())
+                .setName("hiname")
+                .setDescription("hidescr")
+                .setStatus("sts")
+                .setValue("442")
+                .setKsmObjectId("e5b86f7e-6a3f-4050-aac1-b068e634d548")
+                .build();
+    }
+    @Test
+    public void linkKSMCI2KSMCI() throws InstantiationException, IllegalAccessException {
+        ksmTopoService.linkKSMCI2KSMCI(
+                ksmTopoService.createNewCI()
+                        .setName("CI name")
+                        .setDescription("desc")
+                        .setKsmObjectId("b1f55a88-f0b0-4560-9984-7ab8e3f37bef")
+                        .build()
+                ,
+                ksmTopoService.createNewKSMServiceModel()
+                        .setName("serviceName")
+                        .setDescription("desc")
+                        .setKsmObjectId("c2a407f2-3e4a-48c8-8687-65da01995f88")
+                        .build()
+
+
+        );
+    }
+
+
+    @Test
+    public void getKSMServiceModel() {
+        KSMServiceModel ksmServiceModel = ksmTopoService.getKSMServiceModel("c2a407f2-3e4a-48c8-8687-65da01995f88");
+    }
+
+    @Test
+    public void populateGDB() throws InstantiationException, IllegalAccessException {
+        KSMCI srvc = ksmTopoService.createNewKSMServiceModel()
+                .setName("serviceName")
+                .setDescription("desc")
+                .setKsmObjectId("c2a407f2-3e4a-48c8-8687-65da01995f88")
+                .build();
+
+        ksmTopoService.addNewKSMHIToKSMCI(
+                ksmTopoService.createNewKSMServiceModel()
+                        .setKsmObjectId("c2a407f2-3e4a-48c8-8687-65da01995f88")
+                        .build())
+                .setName("service_hi_name")
+                .setDescription("hidescr")
+                .setStatus("sts")
+                .setValue("442")
+                .setKsmObjectId("e5b86f7e-6a3f-4050-aac1-b068e634d548")
+                .build();
+
+        ksmTopoService.addNewKSMKPIToKSMCI(
+                ksmTopoService.createNewKSMServiceModel()
+                        .setName("serviceName")
+                        .setDescription("desc")
+                        .setKsmObjectId("c2a407f2-3e4a-48c8-8687-65da01995f88")
+                        .build())
+                .setName("service_kpi_name")
+                .setDescription("kpidescr")
+                .setRuleId("someruleid")
+                .setStatus("sts")
+                .setValue("42")
+                .build();
+
+        KSMCI appCI = ksmTopoService.createNewCI()
+                .setName("Application CI")
+                .setDescription("desc")
+                .setKsmObjectId(UUID.randomUUID().toString())
+                .build();
+
+        KSMCI dbCI = ksmTopoService.createNewCI()
+                .setName("DATABASE CI")
+                .setDescription("desc")
+                .setKsmObjectId(UUID.randomUUID().toString())
+                .build();
+
+        ksmTopoService.linkKSMCI2KSMCI(dbCI , appCI);
+        ksmTopoService.linkKSMCI2KSMCI(dbCI , srvc);
+        ksmTopoService.linkKSMCI2KSMCI(appCI , srvc);
+
+        ksmTopoService.addNewKSMHIToKSMCI(
+                dbCI)
+                .setName("database_hi_name")
+                .setDescription("hidescr")
+                .setStatus("sts")
+                .setValue("442")
+                .build();
+
+        ksmTopoService.addNewKSMKPIToKSMCI(
+                dbCI)
+                .setName("database_kpi_name")
+                .setDescription("kpidescr")
+                .setRuleId("someruleid")
+                .setStatus("sts")
+                .setValue("42")
+                .build();
+
+        ksmTopoService.addNewKSMHIToKSMCI(
+                appCI)
+                .setName("application_hi_name")
+                .setDescription("hidescr")
+                .setStatus("sts")
+                .setValue("442")
+                .build();
+
+        ksmTopoService.addNewKSMKPIToKSMCI(
+                appCI)
+                .setName("application_kpi_name")
+                .setDescription("kpidescr")
+                .setRuleId("someruleid")
+                .setStatus("sts")
+                .setValue("42")
+                .build();
+
+    }
+
+
 }

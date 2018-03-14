@@ -4,7 +4,7 @@ import ru.ip.ksm.ksmobjectapiimpl.builders.infs.abstracts.AbstractKSMIndicatorBu
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMHI;
 
 
-public interface KSMHIBuilder<T extends AbstractKSMIndicatorBuilder<T>>
+public interface KSMHIBuilder<T extends KSMHIBuilder<T>>
         extends AbstractKSMIndicatorBuilder<T> {
     T setStatus(String status);
     T setValue(String value);
@@ -13,5 +13,5 @@ public interface KSMHIBuilder<T extends AbstractKSMIndicatorBuilder<T>>
     T setDescription(String name);
     T setKsmObjectId(String ksmObjectId);
 
-    KSMHI build();
+    KSMHI build() throws IllegalAccessException, InstantiationException;
 }

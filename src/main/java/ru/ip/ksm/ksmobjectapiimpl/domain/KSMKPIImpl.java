@@ -3,17 +3,20 @@ package ru.ip.ksm.ksmobjectapiimpl.domain;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import ru.ip.ksm.ksmobjectapiimpl.domain.abstracts.KSMBaseIndicatorImpl;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMKPI;
+import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMKPI;
 
 @NodeEntity
 public class KSMKPIImpl
         extends KSMBaseIndicatorImpl
-        implements KSMKPI {
+        implements IKSMKPI {
     protected String ksmRuleId;
 
     /** связь с KSMCI*/
     @Relationship(type = "AttachedKSMKPI")
-    protected AttachedKSMKPIKSMRelationShip attachedKSMKPIKSMRelationShip;
+    protected KSMCIImpl relatedKSMCI;
 
     public KSMKPIImpl() {
         super();
@@ -31,11 +34,7 @@ public class KSMKPIImpl
     }
 
     @Override
-    public AttachedKSMKPIKSMRelationShip getAttachedKSMKPIKSMRelationShip() {
-        return attachedKSMKPIKSMRelationShip;
-    }
-
-    public void setAttachedKSMKPIKSMRelationShip(AttachedKSMKPIKSMRelationShip attachedKSMKPIKSMRelationShip) {
-        this.attachedKSMKPIKSMRelationShip = attachedKSMKPIKSMRelationShip;
+    public void setRelatedKSMCI(IKSMCI related_ksmci) {
+        this.relatedKSMCI = (KSMCIImpl)related_ksmci;
     }
 }

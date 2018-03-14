@@ -28,7 +28,7 @@ public class KSMCIBuilderImpl<T extends KSMCIBuilder<T>>
     public KSMCI build() {
         /*TODO: придумать как создавать экземпляры классов с наследованием */
         try {
-            KSMCI tmpCi = (KSMCI) CI_CLASS_IMPL.newInstance();
+            IKSMCI tmpCi = (IKSMCI) CI_CLASS_IMPL.newInstance();
             if ((this.ksmObjId!=null) && (!this.ksmObjId.isEmpty())){
                 /*todo: проверить что id подходит по д формат uuid и применить механизм, который позволит id стать case _IN_sensitive*.
                  */
@@ -53,7 +53,7 @@ public class KSMCIBuilderImpl<T extends KSMCIBuilder<T>>
 
 
 
-            return KSMObjectServiceFactory.getKSMCIService((Class<? extends KSMCI>) CI_CLASS_IMPL, ksmObjectApiServiceProvider).createOrUpdate(tmpCi);
+            return (KSMCI) KSMObjectServiceFactory.getKSMCIService((Class<? extends KSMCI>) CI_CLASS_IMPL, ksmObjectApiServiceProvider).createOrUpdate(tmpCi);
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
             IllegalArgumentException exc = new IllegalArgumentException("something goes wrong");

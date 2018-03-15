@@ -30,10 +30,10 @@ public class KSMHIServiceOGMImpl<T extends IKSMHI>
         return KSMHIImpl.class;
     }
 
-    @Override
-    public T createOrUpdate(T ksmObject) {
-        T hi = super.createOrUpdate(ksmObject);
-        /*TODO: заменить на сто-то более простое!!!!!! не очевидно!!!*/
-        return  hi;
-    }
+//    @Override
+//    public T createOrUpdate(T ksmObject) {
+//        T hi = super.createOrUpdate(ksmObject);
+//        /*TODO: заменить на сто-то более простое!!!!!! не очевидно!!!*/
+//        return  hi;
+//    }
 }

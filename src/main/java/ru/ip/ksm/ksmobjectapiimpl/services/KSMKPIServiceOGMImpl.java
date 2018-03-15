@@ -15,6 +15,7 @@ public class KSMKPIServiceOGMImpl<T extends IKSMKPI>
     extends BaseKSMIndicatorService<T , IKSMIndicator>
         implements KSMKPIService {
     private final Class<? extends IKSMKPI> ksmkpi_class_impl;
+
     public KSMKPIServiceOGMImpl(Class<? extends IKSMKPI> ksmkpi_class_impl, KSMCI related_ksmci, KSMObjectApiServiceProvider ksmObjectApiServiceProvider) {
         super(related_ksmci);
         this.ksmkpi_class_impl = ksmkpi_class_impl;
@@ -26,10 +27,10 @@ public class KSMKPIServiceOGMImpl<T extends IKSMKPI>
         return ksmkpi_class_impl;
     }
 
-    @Override
-    public T createOrUpdate(T ksmObject) {
-        T kpi = super.createOrUpdate(ksmObject);
-        /*TODO: заменить на сто-то более простое!!!!!! не очевидно!!!*/
-        return kpi;
-    }
+//    @Override
+//    public T createOrUpdate(T ksmObject) {
+//        T kpi = super.createOrUpdate(ksmObject);
+//        /*TODO: заменить на сто-то более простое!!!!!! не очевидно!!!*/
+//        return kpi;
+//    }
 }

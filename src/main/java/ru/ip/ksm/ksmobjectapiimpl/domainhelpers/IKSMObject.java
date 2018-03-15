@@ -1,6 +1,6 @@
 package ru.ip.ksm.ksmobjectapiimpl.domainhelpers;
 
-public interface IKSMObject {
+public interface IKSMObject<T extends IKSMObject<T>> {
     String getKsmObjectId();
 
     String getName();

@@ -11,6 +11,7 @@ import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMCIBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMServiceModelBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.abstracts.AbstractKSMObjectBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.domain.KSMCIImpl;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMServiceModel;
 
@@ -42,8 +43,8 @@ public class KSMToplogyServiceImplTest {
 
     @Test
     public void getAllKSMCIs() {
-        Set<KSMCI> cis = ksmTopoService.getAllKSMCIs();
-        for (KSMCI ci: cis
+        Set<IKSMCI> cis = ksmTopoService.getAllKSMCIs();
+        for (IKSMCI ci: cis
              ) {
             System.out.println("KSMCI " + ci.getName() + " have ksmid " + ci.getKsmObjectId());
 

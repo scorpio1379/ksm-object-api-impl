@@ -27,9 +27,9 @@ public class KSMToplogyServiceImpl  implements KSMTopologyService {
      */
 
     @Override
-    public Set<KSMCI> getAllKSMCIs() {
+    public Set<IKSMCI> getAllKSMCIs() {
         Set<IKSMCI> returnSet = new HashSet<>();
-        Iterable<IKSMCI> iterables = KSMObjectServiceFactory.getKSMCIService(KSMCIImpl.class, KSM_OBJECT_API_SERVICE_PROVIDER).findAll();
+        Iterable<KSMCI> iterables = KSMObjectServiceFactory.getKSMCIService(KSMCIImpl.class, KSM_OBJECT_API_SERVICE_PROVIDER).findAll();
         iterables.forEach(ksmci -> returnSet.add(ksmci));
         return returnSet;
     }

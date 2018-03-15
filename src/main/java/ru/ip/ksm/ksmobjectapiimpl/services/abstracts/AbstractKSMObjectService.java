@@ -14,11 +14,13 @@ public interface AbstractKSMObjectService<KSMOBJ extends IKSMObject> {
 
     KSMOBJ findByKsmObjId(String ksmObjId);
 
+    KSMOBJ createOrUpdate(KSMOBJ ksmObject);
+
     void delete(Long id);
 
     void delete(String id);
 
     void deleteByKsmObjId(String ksmObjId);
 
-    KSMOBJ createOrUpdate(KSMOBJ ksmObject);
+
 }

@@ -5,7 +5,10 @@ import ru.ip.ksm.ksmobjectapiimpl.builders.impls.abstracts.BaseKSMObjectBuilderI
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMCIBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
+import ru.ip.ksm.ksmobjectapiimpl.services.KSMCIService;
+import ru.ip.ksm.ksmobjectapiimpl.services.KSMCIServiceOGMImpl;
 import ru.ip.ksm.ksmobjectapiimpl.services.factories.KSMObjectServiceFactory;
+import ru.ip.ksm.ksmobjectapiimpl.services.helpers.IKSMCIService;
 
 public class KSMCIBuilderImpl<T extends KSMCIBuilder<T>>
         //extends BaseKSMObjectBuilderImpl<KSMCIBuilder<T>>
@@ -51,9 +54,17 @@ public class KSMCIBuilderImpl<T extends KSMCIBuilder<T>>
                 tmpCi.setDescription("");
             }
 
+            IKSMCI iksmCi = (IKSMCI) tmpCi;
+
+            KSMCI ksmCi = (KSMCI) iksmCi;
+
+            IKSMCIService<KSMCI> ksmCIService = KSMObjectServiceFactory.getKSMCIService((Class<? extends KSMCI>) CI_CLASS_IMPL, ksmObjectApiServiceProvider);
+
+            KSMCI ksmCI = ksmCIService.createOrUpdate(ksmCi);
 
 
-            return (KSMCI) KSMObjectServiceFactory.getKSMCIService((Class<? extends KSMCI>) CI_CLASS_IMPL, ksmObjectApiServiceProvider).createOrUpdate(tmpCi);
+
+            return ksmCI;
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
             IllegalArgumentException exc = new IllegalArgumentException("something goes wrong");

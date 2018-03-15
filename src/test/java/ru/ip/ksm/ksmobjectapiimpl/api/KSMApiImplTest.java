@@ -10,6 +10,7 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.test.rule.TestDirectory;
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceFactory;
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.ksmservices.KSMTopologyService;
 
@@ -50,7 +51,7 @@ public class KSMApiImplTest {
                 .setKsmObjectId(UUID.randomUUID().toString())
                 .build();
 
-        Set<KSMCI> cis = ksmTopoService.getAllKSMCIs();
+        Set<IKSMCI> cis = ksmTopoService.getAllKSMCIs();
 
         System.out.println();
     }

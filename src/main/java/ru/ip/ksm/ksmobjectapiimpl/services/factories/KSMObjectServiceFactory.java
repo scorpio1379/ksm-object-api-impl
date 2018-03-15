@@ -8,18 +8,24 @@ import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMService;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMHI;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMKPI;
+import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMService;
 import ru.ip.ksm.ksmobjectapiimpl.services.*;
 import ru.ip.ksm.ksmobjectapiimpl.services.abstracts.AbstractKSMObjectService;
+import ru.ip.ksm.ksmobjectapiimpl.services.helpers.IKSMCIService;
 import ru.ip.ksm.ksmobjectapiimpl.services.helpers.IKSMServiceService;
 
 public class KSMObjectServiceFactory {
-    public static KSMCIServiceOGMImpl<IKSMCI> getKSMCIService(Class<? extends IKSMCI> ci_class_impl, KSMObjectApiServiceProvider ksmObjectApiServiceProvider) {
-        return new KSMCIServiceOGMImpl<IKSMCI>(ci_class_impl,ksmObjectApiServiceProvider);
+//    public static KSMCIServiceOGMImpl<IKSMCI> getKSMCIService(Class<? extends IKSMCI> ci_class_impl, KSMObjectApiServiceProvider ksmObjectApiServiceProvider) {
+////        return new KSMCIServiceOGMImpl<IKSMCI>(ci_class_impl,ksmObjectApiServiceProvider);
+////    }
+    public static KSMCIService getKSMCIService(Class<? extends IKSMCI> ci_class_impl, KSMObjectApiServiceProvider ksmObjectApiServiceProvider) {
+         return (KSMCIService) new KSMCIServiceOGMImpl<KSMCI>(ci_class_impl, ksmObjectApiServiceProvider);
     }
 
     public static KSMKPIServiceOGMImpl<IKSMKPI> getKSMKPIService(Class<? extends IKSMKPI> ksmkpi_class_impl
             , KSMCI related_ksmci
             , KSMObjectApiServiceProvider ksmObjectApiServiceProvider) {
+        KSMKPIServiceOGMImpl<IKSMKPI> o = new KSMKPIServiceOGMImpl<>(ksmkpi_class_impl, related_ksmci, ksmObjectApiServiceProvider);
         return  new KSMKPIServiceOGMImpl<>(ksmkpi_class_impl,related_ksmci,ksmObjectApiServiceProvider) ;
 
     }

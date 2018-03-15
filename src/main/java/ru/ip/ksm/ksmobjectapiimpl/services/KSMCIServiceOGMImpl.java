@@ -3,18 +3,23 @@ package ru.ip.ksm.ksmobjectapiimpl.services;
 
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMObject;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMService;
+import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.AbstractKSMObject;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.services.abstracts.BaseKSMObjectServiceOGMImpl;
+import ru.ip.ksm.ksmobjectapiimpl.services.helpers.IKSMCIService;
 
-public class KSMCIServiceOGMImpl<T extends IKSMCI>
-        extends BaseKSMObjectServiceOGMImpl<T>
-implements KSMCIService
+public class KSMCIServiceOGMImpl<KSMOBJ extends IKSMCI>
+        extends BaseKSMObjectServiceOGMImpl<KSMOBJ>
+        //implements IKSMCIService<IKSMCI>
+    implements IKSMCIService<KSMOBJ>
 {
     protected  Class<? extends IKSMCI> CI_CLASS_IMPL;
     //private  KSMObjectApiServiceProvider ksmObjectApiServiceProvider;
-    public KSMCIServiceOGMImpl() {
-
-    }
+//    public KSMCIServiceOGMImpl() {
+//
+//    }
 
     public KSMCIServiceOGMImpl(Class<? extends IKSMCI> ci_class_impl , KSMObjectApiServiceProvider ksmObjectApiServiceProvider) {
         this.CI_CLASS_IMPL = ci_class_impl;
@@ -29,9 +34,8 @@ implements KSMCIService
         return this.CI_CLASS_IMPL;
     }
 
-
     @Override
-    public IKSMCI doSmthWithCI(IKSMCI ksmci) {
-        return null;
+    public KSMOBJ doSmthWithCI(KSMOBJ ksmci) {
+        return ksmci;
     }
 }

@@ -1,10 +1,11 @@
 package ru.ip.ksm.ksmobjectapiimpl.services.abstracts;
 
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMIndicator;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMObject;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.AbstractKSMObject;
 
-public interface AbstractKSMIndicatorService<T extends IKSMObject>
-        extends AbstractKSMObjectService<T> {
+public interface AbstractKSMIndicatorService<KSMOBJ extends IKSMIndicator> //<KSMOBJ extends IKSMObject>
+        extends AbstractKSMObjectService<KSMOBJ> {
 
-    T doSomeThingWithIndicator(T indicator);
+    KSMOBJ doSomeThingWithIndicator(KSMOBJ indicator);
 }

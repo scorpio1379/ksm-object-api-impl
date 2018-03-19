@@ -11,7 +11,6 @@ import org.neo4j.test.rule.TestDirectory;
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceFactory;
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.ksmservices.KSMTopologyService;
 
 import java.net.URI;
@@ -27,7 +26,7 @@ public class KSMApiImplTest {
     protected KSMApi ksmApi;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
 //        System.out.println("testDir = " + testDirectory.directory());
 //        graphDb = new TestGraphDatabaseFactory().newImpermanentDatabase(testDirectory.directory());
 //        KSMObjectApiServiceProvider provider = KSMObjectApiServiceFactory.getKSMObjectApiServiceProvider(URI.create("bolt://localhost:7687"));
@@ -35,7 +34,7 @@ public class KSMApiImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         //graphDb.shutdown();
     }
 
@@ -45,7 +44,7 @@ public class KSMApiImplTest {
         KSMObjectApiServiceProvider provider = KSMObjectApiServiceFactory.getKSMObjectApiServiceProvider(URI.create("bolt://localhost:7687"));
         this.ksmApi = provider.connect();
         KSMTopologyService ksmTopoService = this.ksmApi.getKSMTopologyService();
-        KSMCI ci = ksmTopoService.createNewCI()
+        IKSMCI ci = ksmTopoService.createNewCI()
                 .setName("name")
                 .setDescription("desc")
                 .setKsmObjectId(UUID.randomUUID().toString())

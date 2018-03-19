@@ -3,14 +3,10 @@ package ru.ip.ksm.ksmobjectapiimpl.services;
 
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
-import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMObject;
-import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMService;
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.AbstractKSMObject;
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.services.abstracts.BaseKSMObjectServiceOGMImpl;
 import ru.ip.ksm.ksmobjectapiimpl.services.helpers.IKSMCIService;
 
-public class KSMCIServiceOGMImpl<KSMOBJ extends IKSMCI>
+public class KSMCIServiceOGMImpl<KSMOBJ extends IKSMCI<KSMOBJ>>
         extends BaseKSMObjectServiceOGMImpl<KSMOBJ>
         //implements IKSMCIService<IKSMCI>
     implements IKSMCIService<KSMOBJ>

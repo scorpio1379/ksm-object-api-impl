@@ -1,8 +1,6 @@
 package ru.ip.ksm.ksmobjectapiimpl.domainhelpers;
 
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
-
-public interface IKSMIndicator extends IKSMObject {
+public interface IKSMIndicator<T extends IKSMIndicator<T>> extends IKSMObject<T> {
 
     String getStatus();
     String getValue();
@@ -14,4 +12,5 @@ public interface IKSMIndicator extends IKSMObject {
     void setKsmIndicatorType(String ksmkpi);
 
     void setRelatedKSMCI(IKSMCI related_ksmci);
+
 }

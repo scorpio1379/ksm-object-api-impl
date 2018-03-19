@@ -1,4 +1,4 @@
 package ru.ip.ksm.ksmobjectapiimpl.domainhelpers;
 
-public interface IKSMHI extends IKSMIndicator {
+public interface IKSMHI<T extends IKSMHI<T>> extends IKSMIndicator<T> {
 }

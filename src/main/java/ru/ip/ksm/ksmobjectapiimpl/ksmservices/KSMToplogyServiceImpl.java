@@ -3,12 +3,16 @@ package ru.ip.ksm.ksmobjectapiimpl.ksmservices;
 
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
 import ru.ip.ksm.ksmobjectapiimpl.builders.factories.KSMObjectBuilderfactory;
-import ru.ip.ksm.ksmobjectapiimpl.builders.factories.KSMRelationShipBuilderFactory;
-import ru.ip.ksm.ksmobjectapiimpl.builders.infs.*;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMHIBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMKPIBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.interfaces.IKSMCIBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.interfaces.IKSMServiceBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.interfaces.IKSMServiceModelBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.domain.KSMCIImpl;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMServiceModel;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.*;
-import ru.ip.ksm.ksmobjectapiimpl.ksmobjectmanagers.interfaces.KSMServiceModelManager;
+import ru.ip.ksm.ksmobjectapiimpl.ksmobjectmanagers.interfaces.IKSMServiceModelManager;
 import ru.ip.ksm.ksmobjectapiimpl.ksmobjectmanagers.managerfactory.KSMObjectManagerFactory;
 import ru.ip.ksm.ksmobjectapiimpl.services.factories.KSMObjectServiceFactory;
 
@@ -29,7 +33,7 @@ public class KSMToplogyServiceImpl  implements KSMTopologyService {
     @Override
     public Set<IKSMCI> getAllKSMCIs() {
         Set<IKSMCI> returnSet = new HashSet<>();
-        Iterable<KSMCI> iterables = KSMObjectServiceFactory.getKSMCIService(KSMCIImpl.class, KSM_OBJECT_API_SERVICE_PROVIDER).findAll();
+        Iterable<IKSMCI> iterables = KSMObjectServiceFactory.getKSMCIService(KSMCIImpl.class, KSM_OBJECT_API_SERVICE_PROVIDER).findAll();
         iterables.forEach(ksmci -> returnSet.add(ksmci));
         return returnSet;
     }
@@ -51,26 +55,28 @@ public class KSMToplogyServiceImpl  implements KSMTopologyService {
 
     @Override
     public Set<KSMService> getAllKSMServices() {
-        throw new IllegalArgumentException("Not Implemented YET");
+        return KSMObjectManagerFactory.getKSMServiceManager(KSM_OBJECT_API_SERVICE_PROVIDER).getAllKSMObjectOfThatType();
     }
 
     @Override
-    public KSMCIBuilder createNewCI() {
-        return KSMObjectBuilderfactory.getCIBuilder(KSM_OBJECT_API_SERVICE_PROVIDER);
+    public IKSMCIBuilder createNewCI() {
+        return  KSMObjectBuilderfactory.getKSMCIBuilder(KSM_OBJECT_API_SERVICE_PROVIDER);
     }
 
     @Override
-    public KSMServiceModelBuilder createNewKSMServiceModel() {
+    public IKSMServiceModelBuilder createNewKSMServiceModel() {
         return KSMObjectManagerFactory.getKSMServiceModelManager(KSM_OBJECT_API_SERVICE_PROVIDER).getKSMServiceModelBuilder();
     }
 
     @Override
-    public KSMServiceModel getKSMServiceModel(String ksmObjectId) {
-        return KSMObjectManagerFactory.getKSMServiceModelManager(KSM_OBJECT_API_SERVICE_PROVIDER).getKSMObject(ksmObjectId);
+    public IKSMServiceModel getKSMServiceModel(String ksmObjectId) {
+        IKSMServiceModelManager mgr = KSMObjectManagerFactory.getKSMServiceModelManager(KSM_OBJECT_API_SERVICE_PROVIDER);
+        IKSMServiceModel ret = KSMObjectManagerFactory.getKSMServiceModelManager(KSM_OBJECT_API_SERVICE_PROVIDER).getKSMObject(ksmObjectId);
+        return ret;
     }
 
     @Override
-    public KSMServiceBuilder createNewKSMService() {
+    public IKSMServiceBuilder createNewKSMService() {
         return KSMObjectManagerFactory.getKSMServiceManager(KSM_OBJECT_API_SERVICE_PROVIDER).getKSMServiceBuilder();
     }
 
@@ -80,17 +86,17 @@ public class KSMToplogyServiceImpl  implements KSMTopologyService {
     }
 
     @Override
-    public KSMKPIBuilder addNewKSMKPIToKSMCI(KSMCI ksmci) {
+    public KSMKPIBuilder addNewKSMKPIToKSMCI(IKSMCI<? extends IKSMCI> ksmci) {
         return KSMObjectBuilderfactory.getKSMKPIBuilder(KSM_OBJECT_API_SERVICE_PROVIDER ,ksmci);
     }
 
     @Override
-    public KSMHIBuilder addNewKSMHIToKSMCI(KSMCI ksmci) {
+    public KSMHIBuilder addNewKSMHIToKSMCI(IKSMCI<? extends IKSMCI> ksmci) {
         return KSMObjectBuilderfactory.getKSMHIBuilder(KSM_OBJECT_API_SERVICE_PROVIDER ,ksmci);
     }
 
     @Override
-    public void linkKSMCI2KSMCI(KSMCI sourceKSMCI, KSMCI targetKSMCI) {
+    public void linkKSMCI2KSMCI(IKSMCI<? extends IKSMCI> sourceKSMCI, IKSMCI<? extends IKSMCI> targetKSMCI) {
         KSMObjectManagerFactory.getKSMCI2KSMCIKSMRelationShipManager(KSM_OBJECT_API_SERVICE_PROVIDER).linkKSMCI2KSMCI(sourceKSMCI, targetKSMCI);
 
     }

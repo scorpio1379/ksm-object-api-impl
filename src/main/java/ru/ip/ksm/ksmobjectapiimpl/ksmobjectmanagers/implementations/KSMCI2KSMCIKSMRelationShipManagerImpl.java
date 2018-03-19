@@ -4,8 +4,8 @@ import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
 import ru.ip.ksm.ksmobjectapiimpl.builders.factories.KSMRelationShipBuilderFactory;
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMCI2KSMCIKSMRelationShipBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.domain.relationships.KSMCI2KSMCIKSMRelationShip;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.relationships.IKSMCI2KSMCIKSMRelationShip;
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.ksmobjectmanagers.interfaces.KSMCI2KSMCIKSMRelationShipManager;
 
 public class KSMCI2KSMCIKSMRelationShipManagerImpl implements KSMCI2KSMCIKSMRelationShipManager {
@@ -20,7 +20,7 @@ public class KSMCI2KSMCIKSMRelationShipManagerImpl implements KSMCI2KSMCIKSMRela
     }
 
     @Override
-    public void linkKSMCI2KSMCI(KSMCI sourceKSMCI, KSMCI targetKSMCI) {
+    public void linkKSMCI2KSMCI(IKSMCI<? extends IKSMCI> sourceKSMCI, IKSMCI<? extends IKSMCI> targetKSMCI) {
         KSMCI2KSMCIKSMRelationShipBuilder ksmci2ksmciKSMRelationShipBuilder = KSMRelationShipBuilderFactory.getKSMCI2KSMCIKSMRelationShipBuilder(this.KSM_OBJECT_API_SERVICE_PROVIDER, IKSMCI2KSMCI_KSMRELATIONSHIP_CLASS_IMPL, sourceKSMCI, targetKSMCI);
         ksmci2ksmciKSMRelationShipBuilder.build();
     }

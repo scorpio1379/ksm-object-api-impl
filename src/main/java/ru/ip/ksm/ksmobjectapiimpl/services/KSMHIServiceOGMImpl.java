@@ -2,26 +2,23 @@ package ru.ip.ksm.ksmobjectapiimpl.services;
 
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
 import ru.ip.ksm.ksmobjectapiimpl.domain.KSMHIImpl;
-import ru.ip.ksm.ksmobjectapiimpl.domain.abstracts.KSMBaseIndicatorImpl;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMHI;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMIndicator;
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMHI;
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMKPI;
 import ru.ip.ksm.ksmobjectapiimpl.services.abstracts.BaseKSMIndicatorService;
 
-public class KSMHIServiceOGMImpl<T extends IKSMHI>
+public class KSMHIServiceOGMImpl<T extends IKSMHI<T>>
         //extends BaseKSMIndicatorService<KSMHIImpl, KSMBaseIndicatorImpl>
         extends BaseKSMIndicatorService<T, IKSMIndicator>
         implements KSMHIService {
     private final Class<? extends IKSMHI> ksmhi_class_impl;
 
 
-    public KSMHIServiceOGMImpl(Class<? extends IKSMHI> ksmkpi_class_impl
-            , KSMCI related_ksmci
+    public KSMHIServiceOGMImpl(Class<? extends IKSMHI> ksmhi_class_impl
+            , IKSMCI related_ksmci
             , KSMObjectApiServiceProvider ksmObjectApiServiceProvider) {
         super(related_ksmci);
-        this.ksmhi_class_impl = ksmkpi_class_impl;
+        this.ksmhi_class_impl = ksmhi_class_impl;
         this.session = ksmObjectApiServiceProvider.getSession();
     }
 

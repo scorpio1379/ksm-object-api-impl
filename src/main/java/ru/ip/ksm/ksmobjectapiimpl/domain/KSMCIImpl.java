@@ -1,25 +1,21 @@
 package ru.ip.ksm.ksmobjectapiimpl.domain;
 
-import org.neo4j.cypher.internal.frontend.v2_3.SemanticDirection;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
-import ru.ip.ksm.ksmobjectapiimpl.builders.factories.KSMObjectBuilderfactory;
-import ru.ip.ksm.ksmobjectapiimpl.builders.impls.KSMHIBuilderImpl;
 import ru.ip.ksm.ksmobjectapiimpl.domain.abstracts.KSMBaseObjectImpl;
 import ru.ip.ksm.ksmobjectapiimpl.domain.relationships.KSMCI2KSMCIKSMRelationShip;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMHI;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMKPI;
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMHI;
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMKPI;
 
 import java.util.Set;
 
 @NodeEntity
-public class KSMCIImpl
-        extends KSMBaseObjectImpl
-        implements IKSMCI , KSMCI {
+public class KSMCIImpl<T extends KSMCIImpl<T>>
+        extends KSMBaseObjectImpl<T>
+        implements IKSMCI<T> {
 
     protected String ksmCIType = "REGULAR";
 
@@ -78,5 +74,33 @@ public class KSMCIImpl
     @Override
     public void setKsmCIType(String ksmCIType) {
         this.ksmCIType = ksmCIType;
+    }
+
+
+    // create by build json plugin
+    @Override
+    public JSONObject toJson() {
+        JSONObject jo = super.toJson();
+        jo.put("ksmCIType" , this.ksmCIType);
+        JSONArray kpis = new JSONArray();
+        for (IKSMKPI kpi:attachedKSMKPIs
+             ) {
+            kpis.put(kpi.toJson());
+
+        }
+        jo.put("attachedKSMKPIs" ,kpis );
+        JSONArray his = new JSONArray();
+        for (IKSMHI hi:attachedKSMHIs
+                ) {
+            his.put(hi.toJson());
+
+        }
+        jo.put("attachedKSMHIs" ,his );
+        return jo;
+    }
+
+    @Override
+    public String toString() {
+        return toJson().toString();
     }
 }

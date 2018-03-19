@@ -4,10 +4,12 @@ import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
 import ru.ip.ksm.ksmobjectapiimpl.ksmobjectmanagers.implementations.KSMCI2KSMCIKSMRelationShipManagerImpl;
 import ru.ip.ksm.ksmobjectapiimpl.ksmobjectmanagers.implementations.KSMServiceManagerImpl;
 import ru.ip.ksm.ksmobjectapiimpl.ksmobjectmanagers.implementations.KSMServiceModelManagerImpl;
-import ru.ip.ksm.ksmobjectapiimpl.ksmobjectmanagers.interfaces.*;
+import ru.ip.ksm.ksmobjectapiimpl.ksmobjectmanagers.interfaces.IKSMServiceManager;
+import ru.ip.ksm.ksmobjectapiimpl.ksmobjectmanagers.interfaces.IKSMServiceModelManager;
+import ru.ip.ksm.ksmobjectapiimpl.ksmobjectmanagers.interfaces.KSMCI2KSMCIKSMRelationShipManager;
 
 public class KSMObjectManagerFactory {
-    public static KSMServiceModelManager getKSMServiceModelManager(KSMObjectApiServiceProvider ksm_object_api_service_provider) {
+    public static IKSMServiceModelManager getKSMServiceModelManager(KSMObjectApiServiceProvider ksm_object_api_service_provider) {
         return new KSMServiceModelManagerImpl(ksm_object_api_service_provider);
     }
 

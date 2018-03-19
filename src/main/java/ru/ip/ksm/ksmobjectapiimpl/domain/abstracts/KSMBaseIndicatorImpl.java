@@ -1,12 +1,13 @@
 package ru.ip.ksm.ksmobjectapiimpl.domain.abstracts;
 
+import org.json.JSONObject;
 import org.neo4j.ogm.annotation.NodeEntity;
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.AbstarctKSMIndicator;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMIndicator;
 
 @NodeEntity
-public abstract class KSMBaseIndicatorImpl
-        extends KSMBaseObjectImpl
-        implements AbstarctKSMIndicator {
+public abstract class KSMBaseIndicatorImpl<T extends KSMBaseIndicatorImpl<T>>
+        extends KSMBaseObjectImpl<T>
+        implements IKSMIndicator<T> {
     protected String status;
     protected String value;
     protected String ksmIndicatorType;
@@ -41,5 +42,21 @@ public abstract class KSMBaseIndicatorImpl
     @Override
     public void setKsmIndicatorType(String ksmIndicatorType) {
         this.ksmIndicatorType = ksmIndicatorType;
+    }
+
+
+    // create by build json plugin
+    @Override
+    public JSONObject toJson() {
+        JSONObject jo = super.toJson();
+        jo.put("status" , this.status);
+        jo.put("value" , this.value);
+        jo.put("ksmIndicatorType" , this.ksmIndicatorType);
+        return jo;
+    }
+
+    @Override
+    public String toString() {
+        return toJson().toString();
     }
 }

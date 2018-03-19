@@ -1,5 +1,7 @@
 package ru.ip.ksm.ksmobjectapiimpl.domainhelpers;
 
+import org.json.JSONObject;
+
 public interface IKSMObject<T extends IKSMObject<T>> {
     String getKsmObjectId();
 
@@ -18,4 +20,6 @@ public interface IKSMObject<T extends IKSMObject<T>> {
     void setDebuginfo(String debuginfo);
 
 
+    // create by build json plugin
+    JSONObject toJson();
 }

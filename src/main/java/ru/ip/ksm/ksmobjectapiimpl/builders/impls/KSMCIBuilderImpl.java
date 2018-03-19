@@ -2,36 +2,32 @@ package ru.ip.ksm.ksmobjectapiimpl.builders.impls;
 
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
 import ru.ip.ksm.ksmobjectapiimpl.builders.impls.abstracts.BaseKSMObjectBuilderImpl;
-import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMCIBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.interfaces.IKSMCIBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
-import ru.ip.ksm.ksmobjectapiimpl.services.KSMCIService;
-import ru.ip.ksm.ksmobjectapiimpl.services.KSMCIServiceOGMImpl;
 import ru.ip.ksm.ksmobjectapiimpl.services.factories.KSMObjectServiceFactory;
 import ru.ip.ksm.ksmobjectapiimpl.services.helpers.IKSMCIService;
 
-public class KSMCIBuilderImpl<T extends KSMCIBuilder<T>>
+public class KSMCIBuilderImpl<T extends KSMCIBuilderImpl<T,U> , U extends IKSMCI<U>>
         //extends BaseKSMObjectBuilderImpl<KSMCIBuilder<T>>
-        extends BaseKSMObjectBuilderImpl<T>
-        implements KSMCIBuilder<T>
+        extends BaseKSMObjectBuilderImpl<T,U>
+        implements IKSMCIBuilder<T,U>
 {
 
     private final Class<? extends IKSMCI> CI_CLASS_IMPL ;
     protected String ksmCIType = "REGULAR";
-    //private final KSMObjectApiServiceProvider KSMObjectApiServiceProvider ;
+
 
 
     public KSMCIBuilderImpl(Class<? extends IKSMCI> ksmciClassImpl, KSMObjectApiServiceProvider ksm_object_api_service_provider) {
         super(ksm_object_api_service_provider);
         this.CI_CLASS_IMPL = ksmciClassImpl;
-        //this.KSMObjectApiServiceProvider = ksm_object_api_service_provider;
+
     }
 
 
     @Override
-    public KSMCI build() {
-//    public T build() {
-        IKSMCIService<KSMCI> ksmCIService = KSMObjectServiceFactory.getKSMCIService((Class<? extends KSMCI>) CI_CLASS_IMPL, ksmObjectApiServiceProvider);
+    public U build() {
+        IKSMCIService<IKSMCI> ksmCIService = KSMObjectServiceFactory.getKSMCIService(CI_CLASS_IMPL, ksmObjectApiServiceProvider);
         IKSMCI newKSMCI = null;
 
 
@@ -52,8 +48,8 @@ public class KSMCIBuilderImpl<T extends KSMCIBuilder<T>>
                 newKSMCI = createNewKSMCI();
             }
             /** todo: убрать эту ХРЕНЬ!!!!!!!*/
-            newKSMCI = ksmCIService.createOrUpdate((KSMCI)newKSMCI);
-            return (KSMCI) newKSMCI;
+            newKSMCI = ksmCIService.createOrUpdate(newKSMCI);
+            return (U) newKSMCI;
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
             IllegalArgumentException exc = new IllegalArgumentException("something goes wrong");

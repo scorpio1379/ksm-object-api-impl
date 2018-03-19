@@ -1,11 +1,11 @@
 package ru.ip.ksm.ksmobjectapiimpl.builders.infs;
 
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.abstracts.AbstractKSMIndicatorBuilder;
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMHI;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMHI;
 
 
-public interface KSMHIBuilder<T extends KSMHIBuilder<T>>
-        extends AbstractKSMIndicatorBuilder<T> {
+public interface KSMHIBuilder<T extends KSMHIBuilder<T,U> ,U extends IKSMHI<U>>
+        extends AbstractKSMIndicatorBuilder<T,U> {
     T setStatus(String status);
     T setValue(String value);
 
@@ -13,5 +13,5 @@ public interface KSMHIBuilder<T extends KSMHIBuilder<T>>
     T setDescription(String name);
     T setKsmObjectId(String ksmObjectId);
 
-    KSMHI build() throws IllegalAccessException, InstantiationException;
+    U build() throws IllegalAccessException, InstantiationException;
 }

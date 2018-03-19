@@ -1,22 +1,20 @@
 package ru.ip.ksm.ksmobjectapiimpl.services;
 
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
-import ru.ip.ksm.ksmobjectapiimpl.builders.factories.KSMRelationShipBuilderFactory;
-import ru.ip.ksm.ksmobjectapiimpl.domain.KSMKPIImpl;
-import ru.ip.ksm.ksmobjectapiimpl.domain.abstracts.KSMBaseIndicatorImpl;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMIndicator;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMKPI;
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
-import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMKPI;
 import ru.ip.ksm.ksmobjectapiimpl.services.abstracts.BaseKSMIndicatorService;
 
-public class KSMKPIServiceOGMImpl<T extends IKSMKPI>
+public class KSMKPIServiceOGMImpl<T extends IKSMKPI<T>>
         //extends BaseKSMIndicatorService<KSMKPIImpl, KSMBaseIndicatorImpl>
-    extends BaseKSMIndicatorService<T , IKSMIndicator>
+        extends BaseKSMIndicatorService<T , IKSMIndicator>
         implements KSMKPIService {
     private final Class<? extends IKSMKPI> ksmkpi_class_impl;
 
-    public KSMKPIServiceOGMImpl(Class<? extends IKSMKPI> ksmkpi_class_impl, KSMCI related_ksmci, KSMObjectApiServiceProvider ksmObjectApiServiceProvider) {
+    public KSMKPIServiceOGMImpl(Class<? extends IKSMKPI> ksmkpi_class_impl
+            , IKSMCI related_ksmci
+            , KSMObjectApiServiceProvider ksmObjectApiServiceProvider) {
         super(related_ksmci);
         this.ksmkpi_class_impl = ksmkpi_class_impl;
         this.session = ksmObjectApiServiceProvider.getSession();

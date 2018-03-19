@@ -4,7 +4,7 @@ import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMObject;
 import ru.ip.ksm.ksmobjectapiimpl.ksmobjectmanagers.interfaces.abstracts.AbstractKSMObjectManager;
 
-public abstract class BaseKSMObjectManagerImpl<T extends AbstractKSMObjectManager<T ,U> ,U extends IKSMObject>
+public abstract class BaseKSMObjectManagerImpl<T extends AbstractKSMObjectManager<T ,U> ,U extends IKSMObject<U>>
         implements AbstractKSMObjectManager<T ,U> {
     protected final KSMObjectApiServiceProvider ksmObjectApiServiceProvider;
 

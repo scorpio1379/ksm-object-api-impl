@@ -1,10 +1,10 @@
 package ru.ip.ksm.ksmobjectapiimpl.api;
 
 
-import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMCIBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMHIBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMKPIBuilder;
-import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMServiceBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.types.KSMCIBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.types.KSMServiceBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMHI;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMKPI;

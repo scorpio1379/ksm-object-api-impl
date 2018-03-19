@@ -11,12 +11,12 @@ import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMKPI;
 @NodeEntity
 public class KSMKPIImpl
         extends KSMBaseIndicatorImpl
-        implements IKSMKPI {
+        implements IKSMKPI, KSMKPI {
     protected String ksmRuleId;
 
     /** связь с KSMCI*/
     @Relationship(type = "AttachedKSMKPI")
-    protected KSMCIImpl relatedKSMCI;
+    public KSMCIImpl relatedKSMCI;
 
     public KSMKPIImpl() {
         super();

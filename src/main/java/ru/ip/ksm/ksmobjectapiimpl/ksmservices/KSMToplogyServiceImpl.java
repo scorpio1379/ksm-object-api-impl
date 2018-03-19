@@ -61,12 +61,22 @@ public class KSMToplogyServiceImpl  implements KSMTopologyService {
 
     @Override
     public KSMServiceModelBuilder createNewKSMServiceModel() {
-        return KSMObjectBuilderfactory.getKSMServiceModelBuilder(KSM_OBJECT_API_SERVICE_PROVIDER);
+        return KSMObjectManagerFactory.getKSMServiceModelManager(KSM_OBJECT_API_SERVICE_PROVIDER).getKSMServiceModelBuilder();
     }
 
     @Override
     public KSMServiceModel getKSMServiceModel(String ksmObjectId) {
         return KSMObjectManagerFactory.getKSMServiceModelManager(KSM_OBJECT_API_SERVICE_PROVIDER).getKSMObject(ksmObjectId);
+    }
+
+    @Override
+    public KSMServiceBuilder createNewKSMService() {
+        return KSMObjectManagerFactory.getKSMServiceManager(KSM_OBJECT_API_SERVICE_PROVIDER).getKSMServiceBuilder();
+    }
+
+    @Override
+    public KSMService getKSMService(String ksmObjectId) {
+        return (KSMService) KSMObjectManagerFactory.getKSMServiceManager(KSM_OBJECT_API_SERVICE_PROVIDER).getKSMObject(ksmObjectId);
     }
 
     @Override

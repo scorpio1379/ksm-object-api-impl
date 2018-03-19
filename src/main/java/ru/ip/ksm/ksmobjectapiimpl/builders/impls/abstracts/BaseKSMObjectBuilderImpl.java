@@ -2,8 +2,9 @@ package ru.ip.ksm.ksmobjectapiimpl.builders.impls.abstracts;
 
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.abstracts.AbstractKSMObjectBuilder;
+import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMObject;
 
-public class BaseKSMObjectBuilderImpl<T extends AbstractKSMObjectBuilder<T>>
+public class BaseKSMObjectBuilderImpl<T extends AbstractKSMObjectBuilder<T> >
         implements AbstractKSMObjectBuilder<T> {
     protected String ksmObjName;
     protected String ksmObjDescription;
@@ -33,7 +34,30 @@ public class BaseKSMObjectBuilderImpl<T extends AbstractKSMObjectBuilder<T>>
         this.ksmObjId=ksmObjectId;
         return (T) this;
     }
+    @Override
+    public boolean isValidKsmObjectId(String ksmObjectId){
+        if ((ksmObjectId!=null) && (!ksmObjectId.isEmpty())){
+            if (ksmObjectId.matches("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[34][0-9a-fA-F]{3}-[89ab][0-9a-fA-F]{3}-[0-9a-fA-F]{12}")){
+                return true;
+            } else{
+                return false;
+                //throw new IllegalArgumentException("ksmObjId NOT a UUID String");
+            }
 
+        }else{
+            return false;
+            //throw new IllegalArgumentException("KSMObjectId is Null or Empty");
+        }
+    }
+
+
+    protected boolean stringFieldNotNullOrEmpty(String builderStringField) {
+        if ((builderStringField!=null) && (!builderStringField.isEmpty())){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 
 }

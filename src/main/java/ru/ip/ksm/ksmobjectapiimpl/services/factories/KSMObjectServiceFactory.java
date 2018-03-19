@@ -18,8 +18,9 @@ public class KSMObjectServiceFactory {
 //    public static KSMCIServiceOGMImpl<IKSMCI> getKSMCIService(Class<? extends IKSMCI> ci_class_impl, KSMObjectApiServiceProvider ksmObjectApiServiceProvider) {
 ////        return new KSMCIServiceOGMImpl<IKSMCI>(ci_class_impl,ksmObjectApiServiceProvider);
 ////    }
-    public static KSMCIService getKSMCIService(Class<? extends IKSMCI> ci_class_impl, KSMObjectApiServiceProvider ksmObjectApiServiceProvider) {
-         return (KSMCIService) new KSMCIServiceOGMImpl<KSMCI>(ci_class_impl, ksmObjectApiServiceProvider);
+    public static IKSMCIService getKSMCIService(Class<? extends IKSMCI> ci_class_impl, KSMObjectApiServiceProvider ksmObjectApiServiceProvider) {
+
+         return new KSMCIServiceOGMImpl<KSMCI>(ci_class_impl, ksmObjectApiServiceProvider);
     }
 
     public static KSMKPIServiceOGMImpl<IKSMKPI> getKSMKPIService(Class<? extends IKSMKPI> ksmkpi_class_impl
@@ -36,7 +37,7 @@ public class KSMObjectServiceFactory {
         return  new KSMHIServiceOGMImpl<>(ksmhi_class_impl,related_ksmci,ksmObjectApiServiceProvider);
     }
 
-    public static KSMServiceServiceOGMImpl<IKSMService> getKSMServiceService (Class<? extends IKSMService> ksmservice_class_impl
+    public static IKSMServiceService<IKSMService> getKSMServiceService (Class<? extends IKSMService> ksmservice_class_impl
             , KSMObjectApiServiceProvider ksmObjectApiServiceProvider){
         return new KSMServiceServiceOGMImpl<>(ksmObjectApiServiceProvider ,ksmservice_class_impl);
 

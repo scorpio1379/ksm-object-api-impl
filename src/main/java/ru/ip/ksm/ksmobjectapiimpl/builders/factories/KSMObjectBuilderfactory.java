@@ -2,10 +2,7 @@ package ru.ip.ksm.ksmobjectapiimpl.builders.factories;
 
 
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
-import ru.ip.ksm.ksmobjectapiimpl.builders.impls.KSMCIBuilderImpl;
-import ru.ip.ksm.ksmobjectapiimpl.builders.impls.KSMHIBuilderImpl;
-import ru.ip.ksm.ksmobjectapiimpl.builders.impls.KSMKPIBuilderImpl;
-import ru.ip.ksm.ksmobjectapiimpl.builders.impls.KSMServiceModelBuilderImpl;
+import ru.ip.ksm.ksmobjectapiimpl.builders.impls.*;
 import ru.ip.ksm.ksmobjectapiimpl.builders.infs.*;
 import ru.ip.ksm.ksmobjectapiimpl.domain.KSMCIImpl;
 import ru.ip.ksm.ksmobjectapiimpl.domain.KSMHIImpl;
@@ -43,4 +40,7 @@ public class KSMObjectBuilderfactory {
         return new KSMHIBuilderImpl(KSMHI_CLASS_IMPL , ksm_object_api_service_provider , ksmci );
     }
 
+    public static KSMServiceBuilder getKSMServiceBuilder(KSMObjectApiServiceProvider ksmObjectApiServiceProvider) {
+        return new KSMServiceBuilderImpl(KSMSERVICE_CLASS_IMPL , ksmObjectApiServiceProvider);
+    }
 }

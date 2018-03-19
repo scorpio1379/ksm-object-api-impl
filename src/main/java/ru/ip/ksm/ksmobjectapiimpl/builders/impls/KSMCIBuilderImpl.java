@@ -17,6 +17,7 @@ public class KSMCIBuilderImpl<T extends KSMCIBuilder<T>>
 {
 
     private final Class<? extends IKSMCI> CI_CLASS_IMPL ;
+    protected String ksmCIType = "REGULAR";
     //private final KSMObjectApiServiceProvider KSMObjectApiServiceProvider ;
 
 
@@ -29,54 +30,77 @@ public class KSMCIBuilderImpl<T extends KSMCIBuilder<T>>
 
     @Override
     public KSMCI build() {
+//    public T build() {
+        IKSMCIService<KSMCI> ksmCIService = KSMObjectServiceFactory.getKSMCIService((Class<? extends KSMCI>) CI_CLASS_IMPL, ksmObjectApiServiceProvider);
+        IKSMCI newKSMCI = null;
+
+
         /*TODO: придумать как создавать экземпляры классов с наследованием */
+        /*TODO: (если есть id) сделать так что бы обьект забирался по id и потом уже модифицировался, а если id нет то создавалмся по правилу билдера*/
         try {
-            IKSMCI tmpCi = (IKSMCI) CI_CLASS_IMPL.newInstance();
-            if ((this.ksmObjId!=null) && (!this.ksmObjId.isEmpty())){
-                /*todo: проверить что id подходит по д формат uuid и применить механизм, который позволит id стать case _IN_sensitive*.
-                 */
-                if (this.ksmObjId.matches("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[34][0-9a-fA-F]{3}-[89ab][0-9a-fA-F]{3}-[0-9a-fA-F]{12}")){
-                    String low_case_ksmobjid = this.ksmObjId.toUpperCase().toLowerCase();
-                    tmpCi.setKsmObjectId( low_case_ksmobjid);
+            if (isValidKsmObjectId(this.ksmObjId)){
+                IKSMCI oldCi = ksmCIService.find(this.ksmObjId.toUpperCase().toLowerCase());
+
+                if (oldCi!=null){
+                    newKSMCI = updateKSMCI(oldCi);
 
                 }else{
-                    throw new IllegalArgumentException("ksmObjId NOT a UUID String");
+                    newKSMCI = createNewKSMCI();
                 }
+
+            }else{
+                newKSMCI = createNewKSMCI();
             }
-            if ((this.ksmObjName!=null) && (!this.ksmObjName.isEmpty())){
-                tmpCi.setName(this.ksmObjName);
-            }else {
-                throw new IllegalArgumentException("CI MUST HAVE A NAME");
-            }
-            if ((this.ksmObjDescription!=null) && (!this.ksmObjDescription.isEmpty())){
-                tmpCi.setDescription(this.ksmObjDescription);
-            }else {
-                tmpCi.setDescription("");
-            }
-
-            IKSMCI iksmCi = (IKSMCI) tmpCi;
-
-            KSMCI ksmCi = (KSMCI) iksmCi;
-
-            IKSMCIService<KSMCI> ksmCIService = KSMObjectServiceFactory.getKSMCIService((Class<? extends KSMCI>) CI_CLASS_IMPL, ksmObjectApiServiceProvider);
-
-            KSMCI ksmCI = ksmCIService.createOrUpdate(ksmCi);
-
-
-
-            return ksmCI;
+            /** todo: убрать эту ХРЕНЬ!!!!!!!*/
+            newKSMCI = ksmCIService.createOrUpdate((KSMCI)newKSMCI);
+            return (KSMCI) newKSMCI;
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
             IllegalArgumentException exc = new IllegalArgumentException("something goes wrong");
             exc.setStackTrace(e.getStackTrace());
             throw exc;
         }
-
     }
+
+
+    protected IKSMCI updateKSMCI(IKSMCI ksmci) {
+        if (stringFieldNotNullOrEmpty(this.ksmObjName)){
+            ksmci.setName(this.ksmObjName);
+        }
+        if (stringFieldNotNullOrEmpty(this.ksmObjDescription)){
+            ksmci.setDescription(this.ksmObjDescription);
+        }
+        if (stringFieldNotNullOrEmpty(this.ksmCIType)){
+            ksmci.setKsmCIType(this.ksmCIType);
+        }
+        return ksmci;
+    }
+
+
+    protected IKSMCI createNewKSMCI() throws IllegalAccessException, InstantiationException {
+        IKSMCI newKSMCI = CI_CLASS_IMPL.newInstance();
+        if(isValidKsmObjectId(this.ksmObjId)){
+            newKSMCI.setKsmObjectId(this.ksmObjId);
+        }
+        if (stringFieldNotNullOrEmpty(this.ksmCIType)){
+            newKSMCI.setKsmCIType(this.ksmCIType);
+        }
+        if (stringFieldNotNullOrEmpty(this.ksmObjName)){
+            newKSMCI.setName(this.ksmObjName);
+        }else{
+            throw new IllegalArgumentException("CI MUST HAVE A NAME");
+        }
+        if (stringFieldNotNullOrEmpty(this.ksmObjDescription)){
+            newKSMCI.setDescription(this.ksmObjDescription);
+        }
+        return newKSMCI;
+    }
+
 
     @Override
     public T goSmthgwithCIBuilder(T t) {
         return null;
     }
+
 
 }

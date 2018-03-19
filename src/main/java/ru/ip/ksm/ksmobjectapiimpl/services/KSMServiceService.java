@@ -6,5 +6,5 @@ import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMService;
 import ru.ip.ksm.ksmobjectapiimpl.services.helpers.IKSMServiceService;
 
 public interface KSMServiceService
-        extends IKSMServiceService<KSMService> {
+        extends IKSMServiceService<IKSMService> {
 }

@@ -6,6 +6,9 @@ import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMService;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMService;
+import ru.ip.ksm.ksmobjectapiimpl.services.KSMServiceService;
+import ru.ip.ksm.ksmobjectapiimpl.services.KSMServiceServiceOGMImpl;
+import ru.ip.ksm.ksmobjectapiimpl.services.factories.KSMObjectServiceFactory;
 
 import java.lang.reflect.Type;
 import java.util.HashSet;
@@ -28,6 +31,7 @@ public class KSMServiceModelBuilderImpl<T extends  KSMServiceModelBuilder<T> , U
         /*TODO:преобразование типов с неочевидным допущением!!!!*/
         super((Class<IKSMCI>) ksmserviceClassImpl.getSuperclass() ,ksm_object_api_service_provider );
         this.CI_SERVICE_IMPL = ksmserviceClassImpl;
+        this.ksmCIType = "KSMService";
 
     }
 
@@ -40,6 +44,40 @@ public class KSMServiceModelBuilderImpl<T extends  KSMServiceModelBuilder<T> , U
     @Override
     public T addKSMCI(String ksmCiObjectId) {
         throw new IllegalArgumentException("not implemented");
+    }
+
+    @Override
+    public KSMCI build(){
+//        KSMServiceService ksmServiceService = (KSMServiceService) KSMObjectServiceFactory.getKSMServiceService(this.CI_SERVICE_IMPL, this.ksmObjectApiServiceProvider);
+//        IKSMService newKSMService;
+//        try{
+//            if (isValidKsmObjectId(this.ksmObjId)){
+//                IKSMService oldKSMService = ksmServiceService.find(this.ksmObjId);
+//                if (oldKSMService!=null){
+//                    newKSMService = (IKSMService) updateKSMCI(oldKSMService);
+//
+//                }else{
+//                    newKSMService = (IKSMService) createNewKSMCI();
+//                }
+//            }else{
+//                newKSMService = (IKSMService) createNewKSMCI();
+//            }
+//
+//            newKSMService = ksmServiceService.createOrUpdate(newKSMService);
+//        IKSMCI ci = super.build();
+//            return (KSMCI) newKSMService;
+//        }catch (InstantiationException | IllegalAccessException e) {
+//            e.printStackTrace();
+//            IllegalArgumentException exc = new IllegalArgumentException("something goes wrong");
+//            exc.setStackTrace(e.getStackTrace());
+//            throw exc;
+//        }
+        return super.build();
+
+    }
+
+    private void setKSMCITypeAsKSMService(){
+        this.ksmCIType = "KSMService";
     }
 
 

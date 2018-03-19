@@ -6,6 +6,7 @@ import org.neo4j.ogm.annotation.Relationship;
 import ru.ip.ksm.ksmobjectapiimpl.builders.factories.KSMObjectBuilderfactory;
 import ru.ip.ksm.ksmobjectapiimpl.builders.impls.KSMHIBuilderImpl;
 import ru.ip.ksm.ksmobjectapiimpl.domain.abstracts.KSMBaseObjectImpl;
+import ru.ip.ksm.ksmobjectapiimpl.domain.relationships.KSMCI2KSMCIKSMRelationShip;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMHI;
 import ru.ip.ksm.ksmobjectapiimpl.domainhelpers.IKSMKPI;
@@ -18,24 +19,24 @@ import java.util.Set;
 @NodeEntity
 public class KSMCIImpl
         extends KSMBaseObjectImpl
-        implements IKSMCI {
+        implements IKSMCI , KSMCI {
 
     protected String ksmCIType = "REGULAR";
 
     /** связь с KSMKPI*/
-    @Relationship(type = "AttachedKSMKPI")
-    private Set<KSMKPIImpl> attachedKSMKPIs;
+    @Relationship(type = "AttachedKSMKPI", direction = "INCOMING")
+    public Set<KSMKPIImpl> attachedKSMKPIs;
     /** связи с KSMHI*/
-    @Relationship(type = "AttachedKSMHI")
-    private Set<KSMHIImpl> attachedKSMHIs;
+    @Relationship(type = "AttachedKSMHI", direction = "INCOMING")
+    public Set<KSMHIImpl> attachedKSMHIs;
 
     /** связи с  родительскими KSMCI*/
     @Relationship(type = "Linked_KSMCI" , direction = "OUTGOING")
-    private Set<KSMCIImpl> parentKSMCIs;
+    public Set<KSMCI2KSMCIKSMRelationShip> parentKSMCIs;
 
     /** связи с  дочерними KSMCI*/
     @Relationship(type = "Linked_KSMCI" , direction = "INCOMING")
-    private Set<KSMCIImpl> childKSMCIs;
+    public Set<KSMCI2KSMCIKSMRelationShip> childKSMCIs;
 
     public KSMCIImpl() {
         super();
@@ -54,6 +55,7 @@ public class KSMCIImpl
         this.ksmCIType = ksmCIType;
     }
 
+    @Override
     public String getKsmCIType() {
         return ksmCIType;
     }
@@ -71,5 +73,10 @@ public class KSMCIImpl
     public Set<KSMHIImpl> getAllAttachedKSMHIs() {
         throw new IllegalArgumentException("Not implemented yet");
         //return null;
+    }
+
+    @Override
+    public void setKsmCIType(String ksmCIType) {
+        this.ksmCIType = ksmCIType;
     }
 }

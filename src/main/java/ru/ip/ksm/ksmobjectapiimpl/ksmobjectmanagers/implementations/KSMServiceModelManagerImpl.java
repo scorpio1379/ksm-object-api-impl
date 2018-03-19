@@ -3,6 +3,8 @@ package ru.ip.ksm.ksmobjectapiimpl.ksmobjectmanagers.implementations;
 import org.neo4j.ogm.model.Result;
 import org.neo4j.ogm.response.model.RelationshipModel;
 import ru.ip.ksm.ksmobjectapiimpl.apifactory.KSMObjectApiServiceProvider;
+import ru.ip.ksm.ksmobjectapiimpl.builders.factories.KSMObjectBuilderfactory;
+import ru.ip.ksm.ksmobjectapiimpl.builders.infs.KSMServiceModelBuilder;
 import ru.ip.ksm.ksmobjectapiimpl.domain.KSMServiceImpl;
 import ru.ip.ksm.ksmobjectapiimpl.domain.KSMServiceModelImpl;
 import ru.ip.ksm.ksmobjectapiimpl.domain.relationships.KSMCI2KSMCIKSMRelationShip;
@@ -75,5 +77,10 @@ public class KSMServiceModelManagerImpl
 
         return null;
 
+    }
+
+    @Override
+    public KSMServiceModelBuilder getKSMServiceModelBuilder() {
+       return KSMObjectBuilderfactory.getKSMServiceModelBuilder(this.ksmObjectApiServiceProvider);
     }
 }

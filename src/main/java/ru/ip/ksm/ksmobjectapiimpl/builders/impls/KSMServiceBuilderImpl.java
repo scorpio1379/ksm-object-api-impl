@@ -8,7 +8,11 @@ public class KSMServiceBuilderImpl<T extends KSMServiceBuilder<T>>
         extends KSMCIBuilderImpl<T>
         implements KSMServiceBuilder<T>{
 
-    public KSMServiceBuilderImpl(Class<? extends IKSMCI> ksmciClassImpl, KSMObjectApiServiceProvider ksm_object_api_service_provider) {
-        super(ksmciClassImpl, ksm_object_api_service_provider);
+    private final Class<? extends IKSMCI> CI_SERVICE_IMPL;
+
+    public KSMServiceBuilderImpl(Class<? extends IKSMCI> ksmServiceClassImpl, KSMObjectApiServiceProvider ksm_object_api_service_provider) {
+        super((Class<IKSMCI>) ksmServiceClassImpl.getSuperclass() ,ksm_object_api_service_provider );
+        this.CI_SERVICE_IMPL = ksmServiceClassImpl;
+
     }
 }

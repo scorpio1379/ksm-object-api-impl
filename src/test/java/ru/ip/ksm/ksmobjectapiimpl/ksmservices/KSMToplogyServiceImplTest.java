@@ -16,6 +16,7 @@ import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMCI;
 import ru.ip.ksm.ksmobjectapiimpl.externalksmobjectsinfs.KSMServiceModel;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
@@ -37,6 +38,11 @@ public class KSMToplogyServiceImplTest {
                 //.setDaemon(true)
                 .build();
         this.executorService = Executors.newFixedThreadPool(20, threadFactory);
+
+
+//        String deleteString = "MATCH (n)\n" +
+//                "DETACH DELETE n";
+//        provider.getSession().query(deleteString , Collections.EMPTY_MAP);
 
 
     }
@@ -68,29 +74,16 @@ public class KSMToplogyServiceImplTest {
     }
     @Test
     public void createNewKSMServiceModel(){
-        ksmTopoService.createNewKSMServiceModel()
+        ksmTopoService.createNewKSMService()
                 .setName("serviceName")
                 .setDescription("desc")
-                .setKsmObjectId("c2a407f2-3e4a-48c8-8687-65da01995f88")
                 .build();
 
     }
 
     @Test
     public void createNewCI() {
-        for (int i = 0; i < 10 ; i++) {
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    KSMCI d = ksmTopoService.createNewCI()
-                            .setName("CI name CI")
-                            .setDescription("desc")
-                            .setKsmObjectId(UUID.randomUUID().toString())
-                            .build();
-                }
-            });
-            t.run();
-        }
+
 
     }
     @Test
@@ -126,21 +119,17 @@ public class KSMToplogyServiceImplTest {
     }
     @Test
     public void linkKSMCI2KSMCI() throws InstantiationException, IllegalAccessException {
-        ksmTopoService.linkKSMCI2KSMCI(
-                ksmTopoService.createNewCI()
-                        .setName("CI name")
-                        .setDescription("desc")
-                        .setKsmObjectId("b1f55a88-f0b0-4560-9984-7ab8e3f37bef")
-                        .build()
-                ,
-                ksmTopoService.createNewKSMServiceModel()
-                        .setName("serviceName")
-                        .setDescription("desc")
-                        .setKsmObjectId("c2a407f2-3e4a-48c8-8687-65da01995f88")
-                        .build()
-
-
-        );
+//        ksmTopoService.linkKSMCI2KSMCI(
+//                ksmTopoService.createNewCI()
+//                        .setKsmObjectId("0f6a0622-62da-48c1-8f7c-5f790091750d")
+//                        .build()
+//                ,
+//                ksmTopoService.createNewKSMServiceModel()
+//                        .setKsmObjectId("c2a407f2-3e4a-48c8-8687-65da01995f88")
+//                        .build()
+//
+//
+//        );
     }
 
 
@@ -232,6 +221,7 @@ public class KSMToplogyServiceImplTest {
                 .build();
 
     }
+
 
 
 }

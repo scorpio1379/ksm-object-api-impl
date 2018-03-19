@@ -6,4 +6,5 @@ public interface AbstractKSMObjectBuilder<T extends AbstractKSMObjectBuilder<T>>
     T setDescription(String name);
     T setKsmObjectId(String ksmObjectId);
 
+    boolean isValidKsmObjectId(String ksmObjectId);
 }

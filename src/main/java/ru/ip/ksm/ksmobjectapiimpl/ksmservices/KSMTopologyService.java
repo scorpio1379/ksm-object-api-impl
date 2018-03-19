@@ -20,6 +20,9 @@ public interface KSMTopologyService {
 
     KSMServiceModel getKSMServiceModel(String ksmObjectId);
 
+    KSMServiceBuilder createNewKSMService();
+
+    KSMService getKSMService(String ksmObjectId);
 
     KSMKPIBuilder addNewKSMKPIToKSMCI(KSMCI ksmci) ;
 

@@ -10,7 +10,7 @@ public abstract class BaseKSMObjectServiceOGMImpl<KSMOBJ extends IKSMObject>
     {
     protected  Session session;
 
-    private static final int DEPTH_LIST = 0;
+    private static final int DEPTH_LIST = 1;
     private static final int DEPTH_ENTITY = 1;
 
     @Override

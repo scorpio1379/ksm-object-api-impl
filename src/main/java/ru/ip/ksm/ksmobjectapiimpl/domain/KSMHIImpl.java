@@ -13,11 +13,11 @@ import java.util.Set;
 @NodeEntity
 public class KSMHIImpl
         extends KSMBaseIndicatorImpl
-        implements IKSMHI {
+        implements IKSMHI ,KSMHI {
 
     /** связь с KSMCI*/
     @Relationship(type = "AttachedKSMHI")
-    protected KSMCIImpl relatedKSMCI;
+    public KSMCIImpl relatedKSMCI;
 
 
     public KSMHIImpl() {

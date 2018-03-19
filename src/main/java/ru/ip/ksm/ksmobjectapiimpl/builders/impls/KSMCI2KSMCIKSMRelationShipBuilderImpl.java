@@ -37,6 +37,7 @@ public class KSMCI2KSMCIKSMRelationShipBuilderImpl implements KSMCI2KSMCIKSMRela
     @Override
     public void build() {
         InternalIKSMCI2KSMCIKSMRelationShip ci2ciRelation = null;
+        IKSMCI2KSMCIKSMRelationShip rel = null;
         try {
             if (true)throw new IllegalArgumentException("not implemented");
             IKSMCI2KSMCIKSMRelationShip<IKSMCI , IKSMCI> ci2ciRelationShip = (IKSMCI2KSMCIKSMRelationShip<IKSMCI , IKSMCI>) this.IKSMCI2KSMCI_KSMRELATIONSHIP_CLASS_IMPL.newInstance();
@@ -45,21 +46,23 @@ public class KSMCI2KSMCIKSMRelationShipBuilderImpl implements KSMCI2KSMCIKSMRela
         ci2ciRelation.setStartNode(this.sourceKSMCI);
         ci2ciRelation.setEndNode(this.targetKSMCI);
 
-        IKSMCI2KSMCIKSMRelationShip rel = KSMRelationShipServiceFactory.getKSMCI2KSMCIKSMRelationShipService(this.ksmObjectApiServiceProvider, this.IKSMCI2KSMCI_KSMRELATIONSHIP_CLASS_IMPL).createOrUpdate(ci2ciRelation);
-    } catch (InstantiationException|IllegalAccessException|IllegalArgumentException e) {
-        e.printStackTrace();
-        String createCI2CIRelationShipCypherQueryString = String.format(
-                    "MATCH (sourceKSMCI),(targetKSMCI) \n" +
-                            "WHERE sourceKSMCI.ksmObjectId = '%s' AND targetKSMCI.ksmObjectId = '%s' \n"
-                            + "MERGE (sourceKSMCI)-[r:%s]->(targetKSMCI) \n" +
-                            "RETURN r",
-                    this.sourceKSMCI.getKsmObjectId()
-                    , this.targetKSMCI.getKsmObjectId()
-                    //, CI2CI_KSM_RELATIONSHIP_TYPE_STRING
-                ,"Linked_KSMCI"
-        );
-        Iterable<Map<String, Object>> ret = ksmObjectApiServiceProvider.getSession().query(createCI2CIRelationShipCypherQueryString, Collections.emptyMap());
-    }
+        rel = KSMRelationShipServiceFactory.getKSMCI2KSMCIKSMRelationShipService(this.ksmObjectApiServiceProvider, this.IKSMCI2KSMCI_KSMRELATIONSHIP_CLASS_IMPL).createOrUpdate(ci2ciRelation);
+
+        } catch (InstantiationException|IllegalAccessException|IllegalArgumentException e) {
+                System.out.println("implementing default method.");
+            e.printStackTrace();
+            String createCI2CIRelationShipCypherQueryString = String.format(
+                        "MATCH (sourceKSMCI),(targetKSMCI) \n" +
+                                "WHERE sourceKSMCI.ksmObjectId = '%s' AND targetKSMCI.ksmObjectId = '%s' \n"
+                                + "MERGE (sourceKSMCI)-[r:%s]->(targetKSMCI) \n" +
+                                "RETURN r",
+                        this.sourceKSMCI.getKsmObjectId()
+                        , this.targetKSMCI.getKsmObjectId()
+                        //, CI2CI_KSM_RELATIONSHIP_TYPE_STRING
+                    ,"Linked_KSMCI"
+            );
+            Iterable<Map<String, Object>> ret = ksmObjectApiServiceProvider.getSession().query(createCI2CIRelationShipCypherQueryString, Collections.emptyMap());
+        }
 
 
 
